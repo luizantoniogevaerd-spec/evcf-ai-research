@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inteligência Artificial em Venture Capital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #1e2d5e;
+      --navy-dark: #161f44;
+      --navy-nav:  #252e47;
+      --cyan:      #27b5ce;
+      --cyan-dim:  rgba(39,181,206,0.15);
+      --white:     #ffffff;
+      --off:       #f4f6fa;
+      --ink:       #111827;
+      --gray-60:   #4b5563;
+      --gray-40:   #9ca3af;
+      --gray-10:   #e5e7eb;
+      --max:       860px;
+      --side:      48px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--ink); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; inset: 0 0 auto; z-index: 100;
+      background: var(--navy-nav);
+      height: 60px; display: flex; align-items: center;
+      justify-content: space-between; padding: 0 var(--side);
+    }
+    .nav-brand { font-size: 13.5px; font-weight: 600; letter-spacing: 0.03em; color: var(--white); text-decoration: none; }
+    .nav-links { list-style: none; display: flex; gap: 28px; }
+    .nav-links a { font-size: 12.5px; color: rgba(255,255,255,0.65); text-decoration: none; letter-spacing: 0.02em; transition: color .18s; }
+    .nav-links a:hover { color: var(--white); }
+
+    /* ── HERO (dark) ── */
+    .hero {
+      background: var(--navy);
+      position: relative; overflow: hidden;
+      padding: 140px var(--side) 96px;
+      max-width: 100%;
+    }
+    /* cyan triangle pattern */
+    .hero::after {
+      content: '';
+      position: absolute; top: 0; right: 0; bottom: 0;
+      width: 45%;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpolygon points='30,8 52,48 8,48' fill='none' stroke='%2327b5ce' stroke-width='1.5' opacity='0.35'/%3E%3Cpolygon points='30,52 8,12 52,12' fill='none' stroke='%2327b5ce' stroke-width='1.5' opacity='0.25'/%3E%3C/svg%3E");
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+    .hero-inner { max-width: var(--max); margin: 0 auto; position: relative; z-index: 1; }
+    .hero-kicker { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cyan); margin-bottom: 22px; }
+    .hero h1 { font-size: clamp(38px, 5.5vw, 68px); font-weight: 800; line-height: 1.06; letter-spacing: -0.025em; color: var(--white); margin-bottom: 24px; }
+    .hero h1 span { color: var(--cyan); }
+    .hero-lead { font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.75); max-width: 560px; line-height: 1.8; }
+
+    /* ── SECTION WRAPPER ── */
+    .block { max-width: var(--max); margin: 0 auto; padding: 80px var(--side); border-bottom: 1px solid var(--gray-10); }
+    .block.dark { background: var(--navy); max-width: 100%; border-bottom: none; }
+    .block.dark .block-inner { max-width: var(--max); margin: 0 auto; padding: 80px var(--side); }
+    .block.tinted { background: var(--off); }
+
+    /* ── EYEBROW ── */
+    .eyebrow { font-family: 'DM Mono', monospace; font-size: 10.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--cyan); margin-bottom: 18px; display: flex; align-items: center; gap: 12px; }
+    .eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--cyan-dim); }
+    .block.dark .eyebrow { color: var(--cyan); }
+    .block.dark .eyebrow::after { background: rgba(39,181,206,0.2); }
+
+    /* ── HEADINGS ── */
+    h2 { font-size: clamp(26px, 3.8vw, 44px); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 24px; }
+    h3 { font-size: 20px; font-weight: 700; line-height: 1.25; color: var(--ink); margin-bottom: 12px; margin-top: 44px; }
+    h3:first-child { margin-top: 0; }
+    h4 { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 8px; margin-top: 20px; }
+    .block.dark h2, .block.dark h3, .block.dark h4 { color: var(--white); }
+
+    /* ── BODY ── */
+    p { font-size: 15.5px; color: var(--gray-60); line-height: 1.82; margin-bottom: 20px; }
+    p:last-child { margin-bottom: 0; }
+    .block.dark p { color: rgba(255,255,255,0.7); }
+    sup { font-size: 10px; color: var(--cyan); vertical-align: super; line-height: 0; font-family: 'DM Mono', monospace; }
+    hr { border: none; border-top: 1px solid var(--gray-10); margin: 36px 0; }
+
+    /* ── PULLQUOTE ── */
+    .pullquote { border-left: 3px solid var(--cyan); padding: 4px 0 4px 22px; margin: 44px 0; }
+    .pullquote p { font-size: 20px; font-style: italic; font-weight: 300; color: var(--ink); line-height: 1.55; margin-bottom: 10px; }
+    .pullquote cite { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-40); font-style: normal; }
+    .block.dark .pullquote p { color: rgba(255,255,255,0.85); }
+
+    /* ── COLS ── */
+    .cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 32px; }
+    .cols-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; margin-top: 32px; }
+    .col-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cyan); margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--cyan-dim); }
+
+    /* ── MATURITY TABLE ── */
+    .mat-table { width: 100%; border-collapse: collapse; margin-top: 32px; }
+    .mat-table thead tr { border-bottom: 2px solid var(--navy); }
+    .mat-table th { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-40); text-align: left; padding: 10px 14px; font-weight: 500; }
+    .mat-table td { padding: 18px 14px; vertical-align: top; border-bottom: 1px solid var(--gray-10); color: var(--gray-60); font-size: 13.5px; line-height: 1.65; }
+    .mat-table tr:last-child td { border-bottom: none; }
+    .mat-table tr:hover td { background: var(--off); }
+    .mat-lv { font-size: 28px; font-weight: 800; color: var(--navy); line-height: 1; }
+    .mat-nm { font-size: 12px; font-weight: 700; color: var(--navy); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .mat-case { display: inline-block; font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--cyan); color: var(--cyan); padding: 2px 6px; border-radius: 3px; margin-top: 6px; }
+
+    /* ── CHECKLIST ── */
+    .checklist { margin-top: 28px; border-top: 2px solid var(--navy); }
+    .check-item { display: flex; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--gray-10); }
+    .check-item:last-child { border-bottom: none; }
+    .check-n { font-size: 26px; font-weight: 800; color: var(--cyan); flex-shrink: 0; line-height: 1; margin-top: 2px; width: 32px; }
+    .check-text { font-size: 15px; color: var(--gray-60); line-height: 1.72; }
+    .check-text strong { color: var(--ink); font-weight: 600; }
+
+    /* ── DECISION ROW ── */
+    .decision-row { display: grid; grid-template-columns: 1fr 1fr 1fr; margin-top: 28px; border-top: 2px solid var(--navy); }
+    .dc { padding: 18px 18px 18px 0; border-right: 1px solid var(--gray-10); }
+    .dc:first-child { padding-left: 0; }
+    .dc:last-child { border-right: none; padding-right: 0; }
+    .dc-q { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); margin-bottom: 8px; }
+    .dc p { font-size: 13.5px; }
+
+    /* ── LAYER CARDS (P9) ── */
+    .layer-stack { margin-top: 32px; display: flex; flex-direction: column; gap: 1px; }
+    .layer-card { background: var(--white); border: 1px solid var(--gray-10); }
+    .layer-card + .layer-card { border-top: none; }
+    .layer-head { display: flex; align-items: center; gap: 16px; padding: 18px 24px; border-bottom: 1px solid var(--gray-10); background: var(--off); }
+    .layer-num { font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; background: var(--navy); color: var(--white); padding: 3px 10px; border-radius: 3px; flex-shrink: 0; }
+    .layer-title { font-size: 15px; font-weight: 700; color: var(--ink); }
+    .layer-sub { font-size: 12px; color: var(--gray-40); margin-left: auto; font-family: 'DM Mono', monospace; letter-spacing: 0.04em; }
+    .layer-body { padding: 20px 24px; }
+    .layer-body p { font-size: 14px; margin-bottom: 14px; }
+    .layer-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--gray-10); margin-top: 14px; }
+    .lc { padding: 14px 0; }
+    .lc + .lc { padding-left: 20px; border-left: 1px solid var(--gray-10); }
+    .lc-head { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cyan); margin-bottom: 8px; }
+    .lc ul { list-style: none; padding: 0; }
+    .lc ul li { font-size: 13px; color: var(--gray-60); padding: 3px 0; border-bottom: 1px solid var(--gray-10); line-height: 1.5; }
+    .lc ul li:last-child { border-bottom: none; }
+    .lc ul li em { font-style: normal; color: var(--gray-40); font-size: 11.5px; }
+
+    /* ── ARCH DIAGRAM ── */
+    .arch { margin-top: 16px; border: 1px solid var(--gray-10); }
+    .arch-bar { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-40); padding: 10px 16px; border-bottom: 1px solid var(--gray-10); background: var(--off); }
+    .arch-grid { display: grid; grid-template-columns: 1fr 1fr; }
+    .aq { padding: 14px 16px; border-right: 1px solid var(--gray-10); border-bottom: 1px solid var(--gray-10); }
+    .aq:nth-child(even) { border-right: none; }
+    .aq:nth-last-child(-n+2) { border-bottom: none; }
+    .aq-lbl { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); margin-bottom: 8px; }
+    .aq ul { list-style: none; padding: 0; }
+    .aq ul li { font-size: 12.5px; color: var(--gray-60); padding: 2px 0; line-height: 1.5; }
+    .aq ul li .tag { font-family: 'DM Mono', monospace; font-size: 9.5px; color: var(--gray-40); margin-left: 4px; }
+
+    /* ── CASE ── */
+    .case { margin-top: 44px; padding-top: 28px; border-top: 1px solid var(--gray-10); }
+    .case-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; margin-bottom: 18px; }
+    .fund-tag { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); margin-bottom: 6px; }
+    .case-top h3 { margin: 0; font-size: 24px; }
+    .case-kpis { display: flex; gap: 24px; flex-shrink: 0; padding-top: 2px; }
+    .kpi-n { font-size: 22px; font-weight: 800; color: var(--navy); line-height: 1; }
+    .kpi-l { font-size: 10.5px; color: var(--gray-40); margin-top: 3px; }
+
+    /* ── TECH STACK ── */
+    .tech-stack { margin-top: 22px; display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--gray-10); }
+    .ts-col { padding: 16px 0; }
+    .ts-col + .ts-col { padding-left: 24px; border-left: 1px solid var(--gray-10); }
+    .ts-head { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cyan); margin-bottom: 10px; }
+    .ts-list { list-style: none; padding: 0; }
+    .ts-list li { font-size: 13.5px; color: var(--gray-60); padding: 4px 0; border-bottom: 1px solid var(--gray-10); line-height: 1.5; }
+    .ts-list li:last-child { border-bottom: none; }
+    .ts-note { font-size: 12px; color: var(--gray-40); margin-top: 8px; font-style: italic; }
+    .ref-line { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.04em; color: var(--gray-40); margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--gray-10); }
+    .ref-line a { color: var(--cyan); text-decoration: none; border-bottom: 1px solid var(--cyan-dim); }
+
+    /* ── BEFORE/AFTER ── */
+    .ba { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; margin-top: 32px; }
+    .ba-head { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-40); margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--gray-10); }
+    .ba-head.accent { color: var(--cyan); border-bottom-color: var(--cyan); }
+    .ba-list { list-style: none; padding: 0; }
+    .ba-list li { font-size: 14.5px; color: var(--gray-60); padding: 10px 0; border-bottom: 1px solid var(--gray-10); line-height: 1.5; }
+    .ba-list li:last-child { border-bottom: none; }
+    .ba-list.strong li { color: var(--ink); font-weight: 500; }
+
+    /* ── JOURNEY ── */
+    .journey { display: grid; grid-template-columns: repeat(5,1fr); margin-top: 32px; border-top: 3px solid var(--cyan); }
+    .j-step { padding: 16px 12px 16px 0; border-right: 1px solid var(--gray-10); }
+    .j-step:last-child { border-right: none; }
+    .j-n { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--cyan); letter-spacing: 0.1em; margin-bottom: 6px; }
+    .j-step h4 { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 5px; margin-top: 0; }
+    .j-step p { font-size: 12px; line-height: 1.6; color: var(--gray-60); margin: 0; }
+
+    /* ── FOOTNOTES ── */
+    .footnotes { max-width: var(--max); margin: 0 auto; padding: 48px var(--side) 32px; }
+    .fn-hd { font-family: 'DM Mono', monospace; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-40); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--gray-10); }
+    .fn { display: flex; gap: 14px; margin-bottom: 8px; }
+    .fn-n { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--cyan); flex-shrink: 0; min-width: 18px; margin-top: 1px; }
+    .fn-t { font-size: 13px; color: var(--gray-40); line-height: 1.65; }
+    .fn-t em { font-style: italic; }
+    .fn-t a { color: var(--cyan); text-decoration: none; border-bottom: 1px solid var(--cyan-dim); }
+
+    /* ── NAV LOGO + CTA ── */
+    .nav-logo { height: 34px; width: auto; display: block; }
+    .nav-cta { font-size: 12.5px; font-weight: 700; color: var(--navy-dark); background: var(--cyan); padding: 8px 20px; border-radius: 5px; text-decoration: none; white-space: nowrap; transition: background .18s, transform .15s; letter-spacing: 0.01em; }
+    .nav-cta:hover { background: #1fa0b8; transform: translateY(-1px); }
+
+    /* ── HERO CTA ── */
+    .hero-actions { margin-top: 40px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+    .btn-cta { display: inline-block; font-size: 15px; font-weight: 700; color: var(--navy-dark); background: var(--cyan); padding: 15px 34px; border-radius: 6px; text-decoration: none; transition: background .18s, transform .15s; letter-spacing: 0.01em; }
+    .btn-cta:hover { background: #1fa0b8; transform: translateY(-2px); }
+    .btn-ghost { display: inline-block; font-size: 15px; font-weight: 500; color: rgba(255,255,255,0.75); border: 1px solid rgba(255,255,255,0.3); padding: 15px 28px; border-radius: 6px; text-decoration: none; transition: border-color .18s, color .18s; }
+    .btn-ghost:hover { border-color: var(--cyan); color: var(--white); }
+
+    /* ── CTA BANNER ── */
+    .cta-banner { background: var(--navy); padding: 72px var(--side); text-align: center; border-top: 1px solid rgba(39,181,206,0.15); border-bottom: 1px solid rgba(39,181,206,0.15); }
+    .cta-banner-inner { max-width: 620px; margin: 0 auto; }
+    .cta-banner .eyebrow { justify-content: center; }
+    .cta-banner .eyebrow::after { display: none; }
+    .cta-banner h2 { color: var(--white); margin-bottom: 16px; }
+    .cta-banner p { color: rgba(255,255,255,0.65); max-width: 520px; margin: 0 auto 36px; font-size: 16px; line-height: 1.75; }
+
+    /* ── AWS SECTION ── */
+    .aws-section { background: var(--navy-dark); padding: 72px var(--side); text-align: center; border-top: 1px solid rgba(39,181,206,0.2); }
+    .aws-inner { max-width: var(--max); margin: 0 auto; }
+    .aws-label { font-family: 'DM Mono', monospace; font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--cyan); margin-bottom: 32px; }
+    .aws-logo-wrap { display: flex; justify-content: center; align-items: center; margin-bottom: 24px; }
+    .aws-logo-box { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 22px 48px; display: inline-flex; align-items: center; gap: 14px; }
+    .aws-icon { width: 44px; height: 44px; flex-shrink: 0; }
+    .aws-wordmark { text-align: left; }
+    .aws-wordmark-top { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; color: rgba(255,255,255,0.5); text-transform: uppercase; line-height: 1; margin-bottom: 4px; }
+    .aws-wordmark-name { font-size: 20px; font-weight: 800; color: var(--white); letter-spacing: -0.01em; line-height: 1; }
+    .aws-wordmark-name span { color: #FF9900; }
+    .aws-section p { color: rgba(255,255,255,0.55); font-size: 14px; max-width: 500px; margin: 0 auto; line-height: 1.8; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--navy-dark); padding: 40px var(--side) 32px; display: flex; flex-direction: column; gap: 28px; border-top: 1px solid rgba(255,255,255,0.07); }
+    .footer-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    .footer-logo { height: 30px; width: auto; display: block; opacity: 0.85; }
+    .footer-partners { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .footer-partner-label { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-right: 4px; }
+    .partner-chip { font-family: 'DM Mono', monospace; font-size: 10.5px; letter-spacing: 0.06em; color: rgba(255,255,255,0.45); text-transform: uppercase; border: 1px solid rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 4px; white-space: nowrap; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.07); }
+    footer p { font-size: 11.5px; color: rgba(255,255,255,0.35); margin: 0; }
+    footer a { color: var(--cyan); text-decoration: none; }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      :root { --side: 22px; }
+      .nav-links { display: none; }
+      .footer-top { flex-direction: column; align-items: flex-start; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+      .cols-2, .cols-3, .ba, .decision-row, .tech-stack, .layer-cols { grid-template-columns: 1fr; }
+      .ts-col + .ts-col { padding-left: 0; border-left: none; border-top: 1px solid var(--gray-10); }
+      .lc + .lc { padding-left: 0; border-left: none; border-top: 1px solid var(--gray-10); }
+      .arch-grid { grid-template-columns: 1fr; }
+      .aq:nth-child(even) { border-right: none; }
+      .journey { grid-template-columns: 1fr 1fr; }
+      .case-top { flex-direction: column; }
+      .case-kpis { flex-direction: row; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" style="display:flex;align-items:center;">
+    <img class="nav-logo" src="https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4600/c075fae2-3eef-4508-ba1f-968cb13a3f3d" alt="Emerging VC Fellows" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="#beneficios">Por que adotar</a></li>
+    <li><a href="#maturidade">Maturidade</a></li>
+    <li><a href="#p9">Arquitetura P9</a></li>
+    <li><a href="#cases">Cases</a></li>
+    <li><a href="#time">Time</a></li>
+    <li><a href="#analista">O Analista</a></li>
+  </ul>
+  <a class="nav-cta" href="https://criteriosevcf.carrd.co/" target="_blank">Seja um Fellow</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero reveal">
+  <div class="hero-inner">
+    <p class="hero-kicker">Pesquisa Acadêmica · Março de 2026</p>
+    <h1>Inteligência Artificial<br>em <span>Venture Capital</span></h1>
+    <p class="hero-lead">Uma análise sobre o alinhamento teórico, estratégico e operacional entre sistemas de inteligência artificial e a tomada de decisão em fundos de venture capital, com ênfase em casos documentados e evidências da literatura.</p>
+    <div class="hero-actions">
+      <a class="btn-cta" href="https://criteriosevcf.carrd.co/" target="_blank">Seja um Fellow →</a>
+      <a class="btn-ghost" href="#beneficios">Ler a pesquisa</a>
+    </div>
+  </div>
+</div>
+
+<!-- 01 — POR QUE ADOTAR -->
+<div id="beneficios" class="block reveal">
+  <p class="eyebrow">01 — Justificativa para Adoção</p>
+  <h2>Por que incorporar IA à operação de um fundo</h2>
+
+  <p>Venture capital opera sob alta incerteza, com informação incompleta e retornos altamente assimétricos. Historicamente, a seleção de investimentos combinou julgamento humano, rede de relacionamentos e acesso privilegiado a oportunidades. A digitalização do ecossistema empreendedor — plataformas de startups, redes profissionais, dados de financiamento e sinais digitais de tração — criou, contudo, um novo ambiente informacional que extrapola a capacidade de processamento humano.<sup>1</sup></p>
+
+  <p>Paralelamente, avanços em aprendizado de máquina e modelos de linguagem de grande escala tornaram viável o processamento sistemático desse volume de dados a custo decrescente. A questão central que se impõe aos gestores, portanto, não é se incorporar IA, mas como fazê-lo de forma teoricamente consistente, estrategicamente deliberada e operacionalmente sustentável.<sup>2</sup></p>
+
+  <hr>
+
+  <div class="cols-2">
+    <div>
+      <p class="col-label">Benefícios documentados</p>
+      <h4>Ampliação de cobertura</h4>
+      <p>Sistemas de IA permitem monitorar ordens de grandeza a mais de sinais de mercado do que qualquer equipe humana conseguiria manualmente. Fundos como Earlybird relatam 95% de cobertura de oportunidades relevantes com o EagleEye, respondendo por 50% do deal flow ativo.</p>
+      <h4>Redução de ruído decisório</h4>
+      <p>Algoritmos não sofrem fadiga, efeitos de ancoragem ou variações emocionais ao longo do dia. Kahneman, Sibony e Sunstein (2021) documentam como essa variabilidade — que denominam "ruído" — compromete a qualidade de decisões humanas em contextos de triagem repetitiva.<sup>3</sup></p>
+      <h4>Memória institucional persistente</h4>
+      <p>Ao contrário de analistas que saem e levam consigo o conhecimento acumulado, sistemas de IA bem configurados retêm contexto, padrões aprendidos e histórico de decisões de forma consultável e persistente entre sessões.</p>
+    </div>
+    <div>
+      <p class="col-label">Riscos e condições de contorno</p>
+      <h4>Viés algorítmico</h4>
+      <p>Dados históricos refletem vieses estruturais de gênero, geografia e background educacional. Sistemas de IA tendem a reproduzir ou amplificar esses padrões se não forem submetidos a auditorias periódicas com métricas de fairness explícitas.<sup>4</sup></p>
+      <h4>Dependência de infraestrutura de terceiros</h4>
+      <p>A adoção de modelos de linguagem como serviço implica dependência de fornecedores externos, com implicações para continuidade operacional, privacidade de dados de portfólio e controle sobre a infraestrutura de decisão do fundo.</p>
+      <h4>Limites intrínsecos ao contexto de VC</h4>
+      <p>Modelos de linguagem aprendem com dados históricos e tendem a subestimar inovações radicais. Venture capital opera sob incerteza não mensurável — Knightiana — não apenas risco probabilístico. A IA produz estimativas condicionais, não certezas.<sup>5</sup></p>
+    </div>
+  </div>
+
+  <div class="pullquote">
+    <p>"Os melhores resultados emergem de sistemas human-in-the-loop, nos quais a IA apoia, mas não substitui, a decisão final do investidor."</p>
+    <cite>Houser &amp; Kisska-Schulze (2022) — Disrupting Venture Capital: Carrots, Sticks and Artificial Intelligence</cite>
+  </div>
+</div>
+
+<!-- 02 — MATURIDADE -->
+<div id="maturidade" class="block tinted reveal">
+  <p class="eyebrow">02 — Framework de Maturidade</p>
+  <h2>Quatro estágios de adoção de IA em fundos de VC</h2>
+
+  <p>A adoção de inteligência artificial em fundos de venture capital não ocorre de forma uniforme. Um erro recorrente consiste em confundir maturidade analítica com uso de IA avançada. A literatura aplicada indica que fundos bem-sucedidos constroem primeiro uma infraestrutura decisória sólida — histórico de decisões documentado, critérios explícitos de investimento e processos estruturados de comitê. A IA atua como camada de amplificação sobre essa base, não como substituto dela. Pesquisas indicam que fundos que adotam tecnologia de forma incremental apresentam melhor absorção organizacional e maior impacto prático.<sup>6</sup></p>
+
+  <table class="mat-table">
+    <thead>
+      <tr>
+        <th>Nível</th>
+        <th>Característica central</th>
+        <th>Ferramentas típicas</th>
+        <th>Processo decisório</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="mat-lv">1</div><div class="mat-nm">Intuitivo</div></td>
+        <td>Networking e experiência pessoal como base primária de decisão. Ausência de dados estruturados sistematizados.</td>
+        <td>Planilhas básicas, e-mail, notas avulsas.</td>
+        <td>Inteiramente humano. Processo difícil de auditar ou replicar.</td>
+      </tr>
+      <tr>
+        <td><div class="mat-lv">2</div><div class="mat-nm">Data-aware</div></td>
+        <td>CRM estruturado e métricas descritivas disponíveis. Consciência dos dados, mas processo de análise ainda predominantemente manual.</td>
+        <td>Affinity, HubSpot, dashboards de BI, Clay para enriquecimento de leads.</td>
+        <td>Humano com suporte de dados. Maior rastreabilidade do pipeline.</td>
+      </tr>
+      <tr>
+        <td><div class="mat-lv">3</div><div class="mat-nm">Data-driven</div><div class="mat-case">Point Nine</div></td>
+        <td>Stack integrada com modelo de linguagem. Memória institucional persistente. Human-in-the-loop por design, sem necessidade de infraestrutura proprietária.</td>
+        <td>Modelos de linguagem conectados via protocolo aberto (MCP) às ferramentas operacionais existentes do fundo.</td>
+        <td>IA organiza e estrutura contexto; investidor toma a decisão com base em informação mais completa e com menor atrito operacional.</td>
+      </tr>
+      <tr>
+        <td><div class="mat-lv">4</div><div class="mat-nm">AI-augmented</div><div class="mat-case">EQT</div><div class="mat-case" style="margin-left:4px;">Earlybird</div></td>
+        <td>Infraestrutura proprietária com modelos customizados, equipe técnica dedicada e ciclo de feedback fechado. Scoring sistemático de oportunidades.</td>
+        <td>Plataformas próprias com NLP, redes neurais de grafos e arquitetura event-driven sobre 50+ fontes de dados integradas.</td>
+        <td>IA gera hipóteses de investimento com base em sinais quantitativos. Time valida e decide. Ciclo de aprendizado contínuo.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="margin-top:24px;">A maioria dos fundos early-stage europeus e brasileiros opera entre os níveis 1 e 2. Fundos no nível 3 são exceção — e os casos documentados no nível 4 são escassos, quase sempre associados a equipe técnica dedicada e capital disponível para investimento em infraestrutura.<sup>7</sup> A contribuição metodológica central desta pesquisa é demonstrar, por meio do caso da Point Nine Capital, que a transição do nível 2 para o nível 3 não requer engenheiro de ML nem orçamento de infraestrutura.</p>
+</div>
+
+<!-- 03 — ARQUITETURA P9 -->
+<div id="p9" class="block reveal">
+  <p class="eyebrow">03 — Anatomia de uma Operação de IA</p>
+  <h2>O P9 AI Command Center: arquitetura em cinco camadas</h2>
+
+  <p>O P9 AI Command Center é o sistema de IA operacional da Point Nine Capital, desenvolvido por Christoph Janz (Managing Partner) sem equipe de engenharia dedicada. O caso documenta a trajetória de adoção: uma primeira tentativa, mais complexa, com banco vetorial (Qdrant), RAG e servidor MCP customizado foi construída em 13 dias e posteriormente descontinuada. A conclusão foi que conectar as fontes de dados diretamente ao Claude via MCP entregava 90–95% do valor com 10% do esforço de manutenção.<sup>8</sup></p>
+
+  <p>A arquitetura resultante é composta por cinco camadas com funções distintas. O detalhamento abaixo discrimina, para cada camada, a tecnologia subjacente e as ferramentas que a implementam — distinção relevante para gestores que avaliam a replicabilidade do modelo.</p>
+
+  <div class="layer-stack">
+
+    <!-- Layer 0+1 -->
+    <div class="layer-card">
+      <div class="layer-head">
+        <span class="layer-num">Layer 0 + 1</span>
+        <span class="layer-title">Identidade, Instrução e Memória Local</span>
+        <span class="layer-sub">Carregadas na inicialização</span>
+      </div>
+      <div class="layer-body">
+        <p>A camada base define a identidade do sistema e a hierarquia de instruções que estrutura cada resposta. É composta por três colunas funcionais: (1) o arquivo CLAUDE.md, carregado permanentemente, que contém identidade do fundo, regras de roteamento, mapa do sistema e calibração de respostas; (2) arquivos de referência lidos sob demanda antes de cada ação, incluindo schemas do Notion, padrões do n8n e protocolo de e-mail; (3) 19 arquivos de memória local armazenados em .claude/memory/ e indexados via MEMORY.md. As permissões são controladas por settings.json (compartilhado) e settings.local (por máquina).</p>
+        <div class="layer-cols">
+          <div class="lc">
+            <p class="lc-head">Tecnologia</p>
+            <ul>
+              <li>Context window management <em>(gestão de contexto persistente)</em></li>
+              <li>Instruction hierarchy <em>(hierarquia de instruções em camadas)</em></li>
+              <li>File-based memory <em>(memória estruturada em sistema de arquivos)</em></li>
+            </ul>
+          </div>
+          <div class="lc">
+            <p class="lc-head">Ferramentas</p>
+            <ul>
+              <li>Claude (Anthropic) <em>— modelo de linguagem</em></li>
+              <li>CLAUDE.md <em>— arquivo de configuração do sistema</em></li>
+              <li>MEMORY.md <em>— índice dos 19 arquivos de memória local</em></li>
+              <li>settings.json / settings.local <em>— permissões</em></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Layer 2 -->
+    <div class="layer-card">
+      <div class="layer-head">
+        <span class="layer-num">Layer 2</span>
+        <span class="layer-title">Bootstrap de Sessão</span>
+        <span class="layer-sub">Executa no início de cada sessão</span>
+      </div>
+      <div class="layer-body">
+        <p>Ao iniciar, o sistema identifica automaticamente qual partner está ativo (CJ, Pawel, Ricardo...) via users.json e puxa silenciosamente as regras aprendidas do Notion Learnings DB antes de qualquer resposta. Se houver observações não confirmadas no buffer de tentative-learnings, estas são apresentadas para aprovação antes de serem incorporadas à memória permanente. O mecanismo garante que cada sessão inicie com o contexto atualizado do fundo sem intervenção manual.</p>
+        <div class="layer-cols">
+          <div class="lc">
+            <p class="lc-head">Tecnologia</p>
+            <ul>
+              <li>Automated context injection <em>(injeção automatizada de contexto)</em></li>
+              <li>User identification <em>(identificação de usuário por sessão)</em></li>
+              <li>Rule propagation <em>(propagação de regras aprendidas)</em></li>
+            </ul>
+          </div>
+          <div class="lc">
+            <p class="lc-head">Ferramentas</p>
+            <ul>
+              <li>users.json <em>— identificação dos partners</em></li>
+              <li>Notion Learnings DB <em>— repositório de regras do time</em></li>
+              <li>tentative-learnings buffer <em>— observações pendentes de aprovação</em></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Layer 3 -->
+    <div class="layer-card">
+      <div class="layer-head">
+        <span class="layer-num">Layer 3</span>
+        <span class="layer-title">Data Plane — Conexões Externas</span>
+        <span class="layer-sub">MCP primário · n8n webhooks como fallback</span>
+      </div>
+      <div class="layer-body">
+        <p>A camada de dados conecta o modelo de linguagem às fontes operacionais reais do fundo via MCP (Model Context Protocol), com fallback via webhooks do n8n para contextos onde o MCP não está disponível (uso móvel, por exemplo). As conexões estão organizadas em quatro quadrantes funcionais.</p>
+        <div class="arch">
+          <p class="arch-bar">Quatro quadrantes do Data Plane</p>
+          <div class="arch-grid">
+            <div class="aq"><p class="aq-lbl">Deal Pipeline</p><ul><li>Zendesk <span class="tag">system of record</span></li><li>Notion Leads</li><li>Attio <span class="tag">contatos</span></li></ul></div>
+            <div class="aq"><p class="aq-lbl">Knowledge &amp; Comms</p><ul><li>Slack</li><li>Gmail</li><li>Granola <span class="tag">reuniões</span></li><li>Google Calendar</li></ul></div>
+            <div class="aq"><p class="aq-lbl">Portfolio Data</p><ul><li>Google Sheets <span class="tag">KPIs e cash</span></li><li>Google Drive <span class="tag">docs e decks</span></li><li>Google Slides</li></ul></div>
+            <div class="aq"><p class="aq-lbl">External Intel</p><ul><li>WebSearch / Web</li><li>Lightpanda <span class="tag">scraping</span></li><li>HN Algolia API</li><li>GitHub API <span class="tag">via n8n</span></li><li>X/Twitter API <span class="tag">via n8n</span></li></ul></div>
+          </div>
+        </div>
+        <div class="layer-cols" style="margin-top:16px;">
+          <div class="lc">
+            <p class="lc-head">Tecnologia</p>
+            <ul>
+              <li>MCP — Model Context Protocol <em>(protocolo de conexão a fontes externas)</em></li>
+              <li>Webhooks <em>(fallback de integração via n8n)</em></li>
+            </ul>
+          </div>
+          <div class="lc">
+            <p class="lc-head">Ferramentas (por quadrante)</p>
+            <ul>
+              <li>Zendesk, Notion, Attio <em>— pipeline</em></li>
+              <li>Slack, Gmail, Granola, Google Calendar <em>— comms</em></li>
+              <li>Google Sheets, Drive, Slides <em>— portfólio</em></li>
+              <li>Lightpanda, HN Algolia, GitHub, X/Twitter <em>— intel</em></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Layer 5 -->
+    <div class="layer-card">
+      <div class="layer-head">
+        <span class="layer-num">Layer 5</span>
+        <span class="layer-title">Memória e Aprendizado Contínuo</span>
+        <span class="layer-sub">Hierarquia: Team &gt; Auto-gen</span>
+      </div>
+      <div class="layer-body">
+        <p>A camada de memória divide o conhecimento em quatro tipos: feedback comportamental (estilo de e-mail, regras de pesquisa de deals, preferências de scouting), contexto de usuário (quem é o partner ativo), estado de projeto (contexto atual de iniciativas em curso) e referências (onde encontrar informação específica). A hierarquia explícita do sistema estabelece que memórias criadas pelo time têm prioridade sobre as geradas automaticamente pelo modelo. O Notion Learnings DB é a versão compartilhada e visível para todo o time; os 19 arquivos em .claude/memory/ permanecem no nível local. Arquivos output/deals/*.md mantêm raciocínio multi-sessão sobre deals específicos.</p>
+        <div class="layer-cols">
+          <div class="lc">
+            <p class="lc-head">Tecnologia</p>
+            <ul>
+              <li>Structured memory management <em>(memória tipada e hierarquizada)</em></li>
+              <li>Cross-session reasoning <em>(raciocínio persistente entre sessões)</em></li>
+              <li>Human-supervised learning <em>(aprendizado supervisionado pelo time)</em></li>
+            </ul>
+          </div>
+          <div class="lc">
+            <p class="lc-head">Ferramentas</p>
+            <ul>
+              <li>.claude/memory/ (19 arquivos) <em>— memória local</em></li>
+              <li>MEMORY.md <em>— índice da memória local</em></li>
+              <li>Notion Learnings DB <em>— memória compartilhada do time</em></li>
+              <li>tentative-learnings buffer <em>— observações pendentes</em></li>
+              <li>output/deals/*.md <em>— raciocínio multi-sessão por deal</em></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /layer-stack -->
+
+  <p class="ref-line" style="margin-top:20px;">Fonte principal: Janz, C. (fev. 2026). <em>AI Killed My SaaS.</em> Point Nine Land — Medium. Também: Janz, C. (jan. 2026). <em>Some Learnings from Vibe Coding a Knowledge Hub in 13 Days.</em> Point Nine Land — Medium. Apresentação no DDVC Summit, 23 mar. 2026.</p>
+</div>
+
+<!-- 04 — CASES: EQT E EARLYBIRD -->
+<div id="cases" class="block tinted reveal">
+  <p class="eyebrow">04 — Cases Comparativos</p>
+  <h2>EQT Ventures e Earlybird: nível 4 de maturidade</h2>
+
+  <p>Os dois casos a seguir representam o estágio mais avançado de adoção de IA em venture capital — nível 4 do framework de maturidade — e caracterizam-se pelo desenvolvimento de infraestrutura proprietária com equipes técnicas dedicadas. Diferem arquiteturalmente do caso Point Nine tanto em escala quanto em abordagem: enquanto a P9 conecta ferramentas existentes via protocolo aberto, EQT e Earlybird construíram plataformas próprias a partir de dados proprietários e modelos customizados.</p>
+
+  <!-- EQT -->
+  <div class="case">
+    <div class="case-top">
+      <div>
+        <p class="fund-tag">EQT Ventures · Estocolmo · Nível 4 · desde 2016</p>
+        <h3>Motherbrain</h3>
+      </div>
+      <div class="case-kpis">
+        <div><div class="kpi-n">50M+</div><div class="kpi-l">empresas monitoradas</div></div>
+        <div><div class="kpi-n">~30</div><div class="kpi-l">pessoas na equipe técnica</div></div>
+      </div>
+    </div>
+    <p>O Motherbrain é o sistema de inteligência artificial da EQT Ventures, em desenvolvimento desde 2016. Seu objetivo central é identificar empresas com potencial de investimento antes que o mercado as reconheça como tais — acessando oportunidades que não chegariam via warm introductions convencionais. A plataforma processa mais de 50 fontes de dados e aplica aprendizado de máquina para mapear métricas e padrões associados ao sucesso de investimentos anteriores.<sup>9</sup></p>
+    <p>A arquitetura é event-driven: dados de múltiplas fontes são ingeridos, fragmentados e enriquecidos em pipeline contínuo antes de chegar à interface dos investidores — acessível via Elasticsearch para consultas rápidas e BigQuery para análises ad hoc pelo time de Labs. O modelo PAUSE (Positive and Annealed Unlabeled Sentence Embedding), apresentado no EMNLP 2021, interpreta sinalizações de mercado a partir de texto não estruturado e alimenta o pipeline de scoring.<sup>10</sup></p>
+    <div class="tech-stack">
+      <div class="ts-col">
+        <p class="ts-head">Tecnologias</p>
+        <ul class="ts-list">
+          <li>Redes Neurais Convolucionais (CNN)</li>
+          <li>Redes Neurais de Grafos (GNN)</li>
+          <li>Processamento de Linguagem Natural (NLP)</li>
+          <li>Arquitetura Event-Driven</li>
+          <li>PAUSE — modelo proprietário de sentence embeddings</li>
+        </ul>
+      </div>
+      <div class="ts-col">
+        <p class="ts-head">Ferramentas e infraestrutura</p>
+        <ul class="ts-list">
+          <li>Apache Kafka — ingestão e streaming de dados em tempo real</li>
+          <li>Google BigQuery — armazenamento e análise ad hoc</li>
+          <li>Elasticsearch — interface de consulta pelos investidores</li>
+          <li>50+ fontes de dados externas integradas ao pipeline</li>
+        </ul>
+      </div>
+    </div>
+    <p class="ref-line">Cao, L. et al. (2021). <em>PAUSE: Positive and Annealed Unlabeled Sentence Embedding.</em> EMNLP 2021. · Cao, L. et al. (2022). <em>Using Deep Learning to Find the Next Unicorn.</em> arXiv:2210.14195. · <a href="https://eqtgroup.com/about/motherbrain" target="_blank">eqtgroup.com/about/motherbrain</a></p>
+  </div>
+
+  <!-- EARLYBIRD -->
+  <div class="case">
+    <div class="case-top">
+      <div>
+        <p class="fund-tag">Earlybird Venture Capital · Berlim · Nível 4</p>
+        <h3>EagleEye</h3>
+      </div>
+      <div class="case-kpis">
+        <div><div class="kpi-n">20M+</div><div class="kpi-l">founders avaliados</div></div>
+        <div><div class="kpi-n">95%</div><div class="kpi-l">cobertura de oportunidades</div></div>
+        <div><div class="kpi-n">200%</div><div class="kpi-l">ganho de eficiência operacional</div></div>
+      </div>
+    </div>
+    <p>O EagleEye é a plataforma proprietária de IA e dados da Earlybird, desenvolvida internamente sob liderança do partner André Retterath. A premissa que orienta sua construção é que a maior parte das oportunidades de investimento relevantes já está representada em dados públicos — e que o problema não é escassez de informação, mas incapacidade de processá-la sistematicamente. O sistema cobre mais de dez milhões de empresas e avalia founders com base em trajetória profissional, sinais de tração e padrões extraídos de investimentos anteriores bem-sucedidos.</p>
+    <p>A plataforma responde por 50% do deal flow ativo do fundo. Importante notar que a Earlybird apresenta o EagleEye explicitamente como amplificador do processo humano de decisão — human-in-the-loop por convicção de design, não por limitação técnica. Esse posicionamento está alinhado com a evidência da literatura de que os melhores resultados emergem da combinação entre capacidade analítica de sistemas automatizados e julgamento qualitativo humano.<sup>6</sup></p>
+    <div class="tech-stack">
+      <div class="ts-col">
+        <p class="ts-head">Tecnologias</p>
+        <ul class="ts-list">
+          <li>Scoring por Machine Learning</li>
+          <li>Análise de trajetória de founders</li>
+          <li>Reconhecimento de padrões de tração</li>
+          <li>Pipeline de ingestão de dados públicos</li>
+        </ul>
+        <p class="ts-note">Arquitetura proprietária — detalhes técnicos não publicados.</p>
+      </div>
+      <div class="ts-col">
+        <p class="ts-head">Ferramentas</p>
+        <ul class="ts-list">
+          <li>EagleEye — plataforma proprietária Earlybird</li>
+          <li>Fontes de dados públicas: LinkedIn, Crunchbase, PitchBook e equivalentes</li>
+        </ul>
+      </div>
+    </div>
+    <p class="ref-line"><a href="https://earlybird.com/eagle-eye" target="_blank">earlybird.com/eagle-eye</a> · Retterath, A. <a href="https://datadrivenvc.io" target="_blank">datadrivenvc.io</a></p>
+  </div>
+
+  <h3 style="margin-top:48px;">IA ao longo da jornada do investidor</h3>
+  <p>Nos três cases analisados, a IA opera de forma distinta em cada etapa do processo de investimento. O mapeamento abaixo sintetiza onde a automação é mais eficaz e onde o julgamento humano permanece central.</p>
+  <div class="journey">
+    <div class="j-step"><p class="j-n">01</p><h4>Deal Sourcing</h4><p>Cobertura via NLP e sinais digitais. Acesso a oportunidades fora do circuito de introductions.</p></div>
+    <div class="j-step"><p class="j-n">02</p><h4>Screening</h4><p>Scoring probabilístico e clusterização. IA filtra volume; investidor valida priorização.</p></div>
+    <div class="j-step"><p class="j-n">03</p><h4>Due Diligence</h4><p>Análise de redes e verificação de claims. IA estrutura contexto; julgamento sobre o founder é humano.</p></div>
+    <div class="j-step"><p class="j-n">04</p><h4>Portfólio</h4><p>Alertas automáticos e monitoramento contínuo de KPIs sem custo marginal por empresa.</p></div>
+    <div class="j-step"><p class="j-n">05</p><h4>Exit &amp; Follow-on</h4><p>Simulação de cenários e apoio analítico de timing.<sup>11</sup> Decisão final permanece com o gestor.</p></div>
+  </div>
+</div>
+
+<!-- CTA BANNER 1 -->
+<div class="cta-banner reveal">
+  <div class="cta-banner-inner">
+    <p class="eyebrow">Emerging VC Fellows</p>
+    <h2>Aprenda a aplicar IA em Venture Capital na prática</h2>
+    <p>O EVCF é o programa que prepara a próxima geração de profissionais de VC com as competências que o mercado está exigindo agora.</p>
+    <a class="btn-cta" href="https://criteriosevcf.carrd.co/" target="_blank">Seja um Fellow →</a>
+  </div>
+</div>
+
+<!-- 05 — TIME -->
+<div id="time" class="block reveal">
+  <p class="eyebrow">05 — Estrutura de Time</p>
+  <h2>Modelos organizacionais para adoção de IA</h2>
+
+  <p>A introdução de IA em operações de VC não é unicamente uma questão tecnológica — é uma questão de design organizacional. Fundos que adicionam ferramentas sem redesenhar processos e responsabilidades consistentemente apresentam adoção fraca e resultados abaixo do potencial. O elemento comum em todos os casos bem-sucedidos analisados nesta pesquisa é a existência de um responsável explícito pela camada de IA, com processo documentado de aprendizado e critérios claros sobre onde a automação atua e onde a decisão é humana.</p>
+
+  <div class="cols-3">
+    <div>
+      <p class="col-label">2 a 6 partners</p>
+      <h4>Modelo distribuído</h4>
+      <p>Um partner ou analista sênior assume a função de AI lead sem exclusividade de tempo. Stack enxuta construída sobre ferramentas existentes, com integração via MCP ou n8n. O caso da Point Nine é o arquétipo desse modelo: zero engenheiro dedicado, arquitetura completa sobre ferramentas já em uso pelo fundo.</p>
+    </div>
+    <div>
+      <p class="col-label">6 a 20 pessoas</p>
+      <h4>Função dedicada</h4>
+      <p>Um profissional com perfil técnico cuida de integração de fontes, qualidade de dados e fluxos de automação. Não é necessariamente engenheiro de ML. O time de investimento opera como cliente interno, com inputs sobre prioridades. A cultura data-driven precisa ser promovida pelos partners para ter absorção efetiva.</p>
+    </div>
+    <div>
+      <p class="col-label">20+ pessoas</p>
+      <h4>Equipe estruturada</h4>
+      <p>Time próprio organizado em funções de Labs (pesquisa), Platform (engenharia de produto) e Research (melhoria de modelos). O modelo da EQT Ventures, com aproximadamente 30 pessoas, representa o extremo desse espectro. O desenvolvimento de modelos proprietários como o PAUSE é economicamente justificável apenas nessa escala.</p>
+    </div>
+  </div>
+
+  <h3>Governança mínima recomendada</h3>
+  <p>Independente do tamanho do fundo, três práticas de governança aparecem de forma consistente nos casos bem-sucedidos: separação explícita e rotulada entre recomendações da IA e decisões do investidor; revisão periódica dos critérios de scoring para identificação e correção de vieses emergentes; e política de dados que define explicitamente quais informações podem ser processadas por modelos externos e quais devem permanecer em infraestrutura controlada pelo fundo.</p>
+</div>
+
+<!-- 06 — O ANALISTA (dark section) -->
+<div id="analista" class="block dark reveal">
+  <div class="block-inner">
+    <p class="eyebrow">06 — O Analista na Transição</p>
+    <h2>Reconfiguração do perfil profissional em VC</h2>
+
+    <p>A adoção de IA em fundos de venture capital não elimina a função do analista — mas altera estruturalmente o perfil de competências que gera valor. O profissional cujo diferencial era volume de processamento (triagem de inbound, pesquisa de mercado, produção de memos, atualização de CRM) vê esse conjunto de atividades progressivamente absorvido por sistemas automatizados. O que passa a ser escasso é um conjunto diferente de capacidades.</p>
+
+    <div class="pullquote">
+      <p>"O profissional de VC que prospera nesse contexto não é o que acumula mais conhecimento de mercado nos primeiros anos — é o que desenvolve a capacidade de construir os sistemas que monitoram esse mercado por ele."</p>
+      <cite>Síntese dos casos documentados e da literatura analisada nesta pesquisa</cite>
+    </div>
+
+    <div class="ba">
+      <div>
+        <p class="ba-head">Competências em declínio de relevância</p>
+        <ul class="ba-list">
+          <li>Processamento manual de alto volume de informações</li>
+          <li>Produção de pesquisas de mercado como entregável primário</li>
+          <li>Redação de memos e decks como atividade central</li>
+          <li>Outreach padronizado sem qualificação prévia de dados</li>
+          <li>Planilhas como ferramenta analítica mais sofisticada disponível</li>
+          <li>Sênioridade medida exclusivamente em anos de experiência</li>
+        </ul>
+      </div>
+      <div>
+        <p class="ba-head accent">Competências em ascensão de relevância</p>
+        <ul class="ba-list strong">
+          <li>Capacidade de construir e automatizar fluxos de trabalho operacionais</li>
+          <li>Curadoria, interpretação e validação de outputs de sistemas de IA</li>
+          <li>Configuração de prompts e sistemas como entregável; memos são gerados, não redigidos</li>
+          <li>Qualificação de contatos por dados estruturados antes do primeiro contato</li>
+          <li>Familiaridade operacional com protocolos de integração, APIs e LLMs</li>
+          <li>Sênioridade medida em capacidade de alavancagem via sistemas construídos</li>
+        </ul>
+      </div>
+    </div>
+
+    <p style="margin-top:28px;">Essa reconfiguração não implica que conhecimento de domínio perdeu relevância. A IA demonstra limitações consistentes em julgamento qualitativo sobre pessoas, em leitura de dinâmicas de poder em cap tables e em percepção de momentum de categoria antes que os dados o confirmem. Essas são as apostas centrais de fundos early-stage — e elas continuam exigindo o que sistemas automatizados não possuem: intuição calibrada por experiência acumulada.</p>
+
+    <p>Para gestores, essa reconfiguração tem implicação direta sobre critérios de contratação: o próximo analista a incorporar ao time provavelmente não é o que apresenta o maior repertório de conhecimento setorial nos primeiros anos, mas o que demonstra maior velocidade de aprendizado, maior facilidade na construção de ferramentas e maior consciência sobre onde reside o custo de oportunidade da atenção humana no processo de investimento.</p>
+
+    <h3>Tendências emergentes</h3>
+    <p>Três direções aparecem com consistência na literatura mais recente. Multimodalidade: integração de texto, redes e séries temporais em modelos únicos amplia a capacidade de identificação de padrões antes de sinais financeiros.<sup>12</sup> Simulação em substituição à predição pura: os sistemas mais eficazes constroem cenários e avaliam a robustez das decisões sob diferentes hipóteses, em vez de tentar prever o futuro com precisão. E a consolidação da infraestrutura de dados como vantagem competitiva estrutural: mais do que o modelo utilizado, o que diferenciará fundos ao longo do tempo é a qualidade, consistência e propriedade dos dados que alimentam seus sistemas de decisão.</p>
+  </div>
+</div>
+
+<!-- CTA BANNER 2 -->
+<div class="cta-banner reveal">
+  <div class="cta-banner-inner">
+    <p class="eyebrow">Próxima turma</p>
+    <h2>O analista do futuro está se formando agora</h2>
+    <p>Os profissionais que dominam IA operacional em VC terão vantagem estrutural nos próximos anos. Comece a construir esse perfil com o EVCF.</p>
+    <a class="btn-cta" href="https://criteriosevcf.carrd.co/" target="_blank">Quero ser Fellow →</a>
+  </div>
+</div>
+
+<!-- FOOTNOTES -->
+<div class="footnotes reveal">
+  <p class="fn-hd">Referências</p>
+  <div class="fn"><span class="fn-n">1.</span><span class="fn-t">Bhatia, A., &amp; Dushnitsky, G. (2023). <em>The Future of Venture Capital? Insights into Data-Driven VCs.</em> California Management Review Insights.</span></div>
+  <div class="fn"><span class="fn-n">2.</span><span class="fn-t">Jain, C. (2018). <em>Artificial Intelligence in Venture Capital Industry: Opportunities and Risks</em> (Master's thesis). MIT.</span></div>
+  <div class="fn"><span class="fn-n">3.</span><span class="fn-t">Kahneman, D., Sibony, O., &amp; Sunstein, C. R. (2021). <em>Noise: A Flaw in Human Judgment.</em> Little, Brown Spark.</span></div>
+  <div class="fn"><span class="fn-n">4.</span><span class="fn-t">Taj, A. (2025). Referenciado em Bhatia &amp; Dushnitsky (2023), op. cit. Sobre viés algorítmico e métricas de fairness.</span></div>
+  <div class="fn"><span class="fn-n">5.</span><span class="fn-t">Metrick, A., &amp; Yasuda, A. (2021). <em>Venture Capital and the Finance of Innovation</em> (3rd ed.). Wiley. Sobre incerteza Knightiana vs. risco probabilístico em VC.</span></div>
+  <div class="fn"><span class="fn-n">6.</span><span class="fn-t">Houser, K. A., &amp; Kisska-Schulze, K. (2022). <em>Disrupting Venture Capital: Carrots, Sticks and Artificial Intelligence.</em> SSRN / UC Irvine Law Review.</span></div>
+  <div class="fn"><span class="fn-n">7.</span><span class="fn-t">Cao, L., von Ehrenheim, V., Krakowski, S., Li, X., &amp; Lutz, A. (2022). <em>Using Deep Learning to Find the Next Unicorn: A Practical Synthesis.</em> arXiv:2210.14195.</span></div>
+  <div class="fn"><span class="fn-n">8.</span><span class="fn-t">Janz, C. (2026, jan.). <em>Some Learnings from Vibe Coding a Knowledge Hub in 13 Days.</em> Point Nine Land. Também: Janz, C. (2026, fev.). <em>AI Killed My SaaS.</em> Point Nine Land. <a href="https://medium.com/point-nine-news/ai-killed-my-saas-55646a9a7522" target="_blank">medium.com/point-nine-news</a></span></div>
+  <div class="fn"><span class="fn-n">9.</span><span class="fn-t">EQT Group. (2021). <em>EQT's AI platform Motherbrain pushes the boundaries of the private markets with novel algorithm for better decision-making.</em> <a href="https://eqtgroup.com/about/motherbrain" target="_blank">eqtgroup.com</a></span></div>
+  <div class="fn"><span class="fn-n">10.</span><span class="fn-t">Cao, L., Larsson, E., von Ehrenheim, V., Rocha, D. D. C., Martin, A., &amp; Horn, S. (2021). <em>PAUSE: Positive and Annealed Unlabeled Sentence Embedding.</em> EMNLP 2021. Association for Computational Linguistics.</span></div>
+  <div class="fn"><span class="fn-n">11.</span><span class="fn-t">Cao, L., Horn, S., von Ehrenheim, V., Stahl, R. A., &amp; Landgren, H. (2022). <em>Simulation-Informed Revenue Extrapolation with Confidence Estimate for Scaleup Companies Using Scarce Time-Series Data.</em> CIKM '22. ACM.</span></div>
+  <div class="fn"><span class="fn-n">12.</span><span class="fn-t">Cao, L., Buchner, V., Senane, Z., &amp; Yang, F. (2024). <em>Introducing GenCeption for Multimodal LLM Benchmarking.</em> TrustNLP 2024. Association for Computational Linguistics.</span></div>
+</div>
+
+<!-- AWS SHARED VISION PARTNER -->
+<div class="aws-section reveal">
+  <div class="aws-inner">
+    <p class="aws-label">Shared Vision Partner</p>
+    <div class="aws-logo-wrap">
+      <div class="aws-logo-box">
+        <svg class="aws-icon" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Amazon Web Services">
+          <path d="M17.4 35.3c0 .7.1 1.3.2 1.7.2.4.4.9.8 1.4.1.2.2.3.2.5 0 .2-.1.4-.4.6l-1.2.8c-.2.1-.3.2-.5.2-.2 0-.4-.1-.5-.3-.3-.3-.5-.6-.7-1-.2-.4-.4-.8-.5-1.4-1.3 1.5-2.9 2.3-4.9 2.3-1.4 0-2.5-.4-3.3-1.2-.8-.8-1.2-1.9-1.2-3.2 0-1.4.5-2.5 1.5-3.4 1-.9 2.4-1.3 4.1-1.3.6 0 1.2 0 1.8.1.6.1 1.3.2 2 .4v-1.3c0-1.3-.3-2.2-.8-2.7-.5-.5-1.4-.8-2.7-.8-.6 0-1.2.1-1.8.2-.6.2-1.2.4-1.8.7-.3.1-.5.2-.6.2-.2 0-.3-.1-.3-.4v-.9c0-.3 0-.5.1-.6.1-.1.3-.3.6-.4.6-.3 1.3-.5 2.1-.7.8-.2 1.6-.3 2.5-.3 1.9 0 3.3.4 4.2 1.3.9.9 1.3 2.2 1.3 4v5.3h.3zm-6.8 2.5c.6 0 1.2-.1 1.8-.4.6-.3 1.1-.7 1.5-1.3.3-.4.4-.8.5-1.2.1-.4.1-.9.1-1.5v-.7c-.5-.1-1-.2-1.5-.3-.5-.1-1-.1-1.5-.1-1.1 0-1.9.2-2.4.6-.5.4-.8 1-.8 1.8 0 .7.2 1.3.6 1.7.4.3 1 .4 1.7.4zm13 1.7c-.3 0-.5-.1-.6-.2-.1-.1-.2-.4-.3-.7l-3.4-11.2c-.1-.3-.1-.6-.1-.7 0-.3.1-.4.4-.4h1.6c.3 0 .5.1.6.2.1.1.2.4.3.7l2.4 9.5 2.2-9.5c.1-.4.2-.6.3-.7.1-.1.3-.2.6-.2h1.3c.3 0 .5.1.6.2.1.1.2.4.3.7l2.3 9.6 2.5-9.6c.1-.4.2-.6.3-.7.1-.1.3-.2.6-.2h1.5c.3 0 .4.1.4.4 0 .1 0 .2-.1.4 0 .2-.1.3-.1.4l-3.5 11.2c-.1.4-.2.6-.3.7-.1.1-.4.2-.6.2H30c-.3 0-.5-.1-.6-.2-.1-.1-.2-.4-.3-.7l-2.2-9.3-2.2 9.3c-.1.4-.2.6-.3.7-.2.1-.4.2-.6.2h-1.2zm18.7.4c-.9 0-1.8-.1-2.6-.4-.9-.2-1.5-.5-2-.8-.3-.2-.5-.4-.5-.6v-.9c0-.3.1-.4.3-.4.1 0 .2 0 .3.1.1.1.3.1.4.2.6.3 1.2.5 1.9.6.7.2 1.3.2 2 .2 1 0 1.8-.2 2.4-.6.5-.4.8-.9.8-1.5 0-.5-.1-.8-.4-1.1-.3-.3-.8-.6-1.7-.8l-2.4-.7c-1.2-.4-2.1-.9-2.7-1.7-.5-.8-.8-1.6-.8-2.5 0-.7.2-1.4.5-1.9.3-.6.8-1.1 1.3-1.5.6-.4 1.2-.7 1.9-.9.7-.2 1.5-.3 2.3-.3.4 0 .8 0 1.2.1.4.1.8.1 1.2.3.4.1.7.2 1 .4.3.1.6.3.7.4.2.2.3.3.4.5.1.2.1.4.1.6v.9c0 .3-.1.4-.3.4-.1 0-.3-.1-.6-.2-.9-.4-1.9-.6-3-.6-.9 0-1.7.1-2.2.5-.5.3-.7.8-.7 1.4 0 .5.1.9.5 1.2.3.3.9.6 1.8.9l2.4.7c1.2.4 2.1.9 2.6 1.6.5.7.8 1.5.8 2.4 0 .7-.2 1.4-.5 2-.3.6-.8 1.1-1.4 1.5-.6.4-1.2.7-2 .9-.8.3-1.7.4-2.6.4z" fill="#FF9900"/>
+          <path d="M53.4 43.5c-5.3 3.9-13.1 6-19.7 6-9.3 0-17.7-3.4-24-9.1-.5-.4-.1-1 .5-.7 6.9 4 15.3 6.4 24 6.4 5.9 0 12.3-1.2 18.3-3.8.9-.4 1.6.6.9 1.2z" fill="#FF9900"/>
+          <path d="M55.7 40.9c-.7-.9-4.5-.4-6.2-.2-.5.1-.6-.4-.1-.7 3-2.1 8-.1 8.5.5.6.7-.2 5.5-3 7.8-.4.4-.8.2-.6-.3.6-1.5 2.1-5.2 1.4-7.1z" fill="#FF9900"/>
+        </svg>
+        <div class="aws-wordmark">
+          <p class="aws-wordmark-top">Powered by</p>
+          <p class="aws-wordmark-name">Amazon <span>Web Services</span></p>
+        </div>
+      </div>
+    </div>
+    <p>A infraestrutura de nuvem e os serviços de IA da AWS sustentam as ferramentas de análise e pesquisa do Emerging VC Fellows, permitindo que fellows desenvolvam competências técnicas em ambiente de produção real.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <a href="https://www.emergingvcfellows.com/" target="_blank">
+      <img class="footer-logo" src="https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4600/c075fae2-3eef-4508-ba1f-968cb13a3f3d" alt="Emerging VC Fellows" />
+    </a>
+    <div class="footer-partners">
+      <span class="footer-partner-label">Parceiros</span>
+      <span class="partner-chip">Amazon Web Services</span>
+      <span class="partner-chip">AWS Activate</span>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>Pesquisa — Março 2026 · <a href="https://www.emergingvcfellows.com/" target="_blank">Emerging VC Fellows</a></p>
+    <p>Conteúdo acadêmico — não constitui recomendação de investimento</p>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } }), { threshold: 0.05 });
+  document.querySelectorAll('.reveal').forEach(e => io.observe(e));
+</script>
+</body>
+</html>
