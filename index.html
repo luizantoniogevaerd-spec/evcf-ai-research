@@ -113,7 +113,8 @@
     .mat-table tr:hover td { background: var(--off); }
     .mat-lv { font-size: 28px; font-weight: 800; color: var(--navy); line-height: 1; }
     .mat-nm { font-size: 12px; font-weight: 700; color: var(--navy); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
-    .mat-case { display: inline-block; font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--cyan); color: var(--cyan); padding: 2px 6px; border-radius: 3px; margin-top: 6px; }
+    .mat-case { display: inline-block; font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--cyan); color: var(--cyan); padding: 2px 6px; border-radius: 3px; margin-top: 6px; cursor: pointer; }
+    .mat-case a { text-decoration: none; color: inherit; display: block; }
 
     /* ── CHECKLIST ── */
     .checklist { margin-top: 28px; border-top: 2px solid var(--navy); }
@@ -299,7 +300,7 @@
     <li><a href="#time">Time</a></li>
     <li><a href="#analista">O Analista</a></li>
   </ul>
-  <a class="nav-cta" href="https://criteriosevcf.carrd.co/" target="_blank">Seja um Fellow</a>
+  <a class="nav-cta" href="https://criteriosevcf.carrd.co/" target="_blank">Seja um Membro</a>
 </nav>
 
 <!-- HERO -->
@@ -308,9 +309,13 @@
     <h1>Inteligência Artificial<br>em <span>Venture Capital</span></h1>
     <p class="hero-lead">Uma análise sobre o alinhamento teórico, estratégico e operacional entre sistemas de inteligência artificial e a tomada de decisão em fundos de venture capital, com ênfase em casos documentados e evidências da literatura.</p>
     <div class="hero-actions">
-      <a class="btn-cta" href="https://criteriosevcf.carrd.co/" target="_blank">Seja um Fellow →</a>
+      <a class="btn-cta" href="https://criteriosevcf.carrd.co/" target="_blank">Seja um Membro →</a>
       <a class="btn-ghost" href="#beneficios">Ler a pesquisa</a>
     </div>
+    <p style="margin-top:24px;font-size:12px;color:rgba(255,255,255,0.5);display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+      Um conteúdo produzido pelo Emerging VC Fellows em parceria com
+      <img src="https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4600/3831ef80-b40b-4067-8c6a-34389ec673c9" alt="AWS" style="height:16px;width:auto;filter:brightness(0) invert(1);opacity:0.75;vertical-align:middle;" />
+    </p>
   </div>
 </div>
 
@@ -322,10 +327,15 @@
     <div>
       <p class="col-label">Quem somos</p>
       <p>O EVCF é uma comunidade exclusiva que conecta, educa e inspira a próxima geração de Venture Capitalists na América Latina. Por meio de programas estruturados, eventos e uma rede qualificada de profissionais do ecossistema, o EVCF prepara seus fellows para atuar com excelência no mercado de capital de risco.</p>
+      <p style="font-size:17px;font-weight:700;color:var(--ink);line-height:1.4;margin-top:20px;margin-bottom:20px;">A comunidade que está formando os próximos líderes de VC na América Latina.</p>
+      <a class="btn-cta" href="https://criteriosevcf.carrd.co/" target="_blank">Seja um Membro →</a>
     </div>
     <div>
-      <p class="col-label">Esta pesquisa</p>
+      <p class="col-label">Realizado com apoio de</p>
       <p>Esta pesquisa foi conduzida pelo EVCF com o objetivo de mapear como fundos de venture capital estão adotando inteligência artificial em suas operações — identificando padrões de maturidade, casos documentados e evidências da literatura aplicada ao contexto latino-americano.</p>
+      <p style="margin-top:16px;">Esta pesquisa não seria possível sem o apoio da AWS. Agradecemos à Amazon Web Services pelo suporte à infraestrutura e à comunidade de inovação no Brasil.</p>
+      <img src="https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4600/3831ef80-b40b-4067-8c6a-34389ec673c9" alt="Amazon Web Services" style="height:20px;width:auto;filter:brightness(0) grayscale(1) opacity(0.6);margin-top:16px;display:block;" />
+      <a href="https://aws.amazon.com/startups" target="_blank" style="display:inline-block;margin-top:12px;font-size:13px;color:var(--cyan);text-decoration:none;border-bottom:1px solid var(--cyan-dim);">Conheça o AWS for Startups →</a>
     </div>
   </div>
 </div>
@@ -398,13 +408,13 @@
         <td>Humano com suporte de dados. Maior rastreabilidade do pipeline.</td>
       </tr>
       <tr>
-        <td><div class="mat-lv">3</div><div class="mat-nm">Data-driven</div><div class="mat-case">Point Nine</div></td>
+        <td><div class="mat-lv">3</div><div class="mat-nm">Data-driven</div><div class="mat-case"><a href="#p9">Point Nine</a></div></td>
         <td>Stack integrada com modelo de linguagem. Memória institucional persistente. Human-in-the-loop por design, sem necessidade de infraestrutura proprietária.</td>
         <td>Modelos de linguagem conectados via protocolo aberto (MCP) às ferramentas operacionais existentes do fundo.</td>
         <td>IA organiza e estrutura contexto; investidor toma a decisão com base em informação mais completa e com menor atrito operacional.</td>
       </tr>
       <tr>
-        <td><div class="mat-lv">4</div><div class="mat-nm">AI-augmented</div><div class="mat-case">EQT</div><div class="mat-case" style="margin-left:4px;">Earlybird</div></td>
+        <td><div class="mat-lv">4</div><div class="mat-nm">AI-augmented</div><div class="mat-case"><a href="#eqt">EQT</a></div><div class="mat-case" style="margin-left:4px;"><a href="#earlybird">Earlybird</a></div></td>
         <td>Infraestrutura proprietária com modelos customizados, equipe técnica dedicada e ciclo de feedback fechado. Scoring sistemático de oportunidades.</td>
         <td>Plataformas próprias com NLP, redes neurais de grafos e arquitetura event-driven sobre 50+ fontes de dados integradas.</td>
         <td>IA gera hipóteses de investimento com base em sinais quantitativos. Time valida e decide. Ciclo de aprendizado contínuo.</td>
@@ -587,7 +597,7 @@
   <p>Os dois casos a seguir representam o estágio mais avançado de adoção de IA em venture capital — nível 4 do framework de maturidade — e caracterizam-se pelo desenvolvimento de infraestrutura proprietária com equipes técnicas dedicadas. Diferem arquiteturalmente do caso Point Nine tanto em escala quanto em abordagem: enquanto a P9 conecta ferramentas existentes via protocolo aberto, EQT e Earlybird construíram plataformas próprias a partir de dados proprietários e modelos customizados.</p>
 
   <!-- EQT -->
-  <div class="case">
+  <div id="eqt" class="case">
     <div class="case-top">
       <div>
         <p class="fund-tag">EQT Ventures · Estocolmo · Nível 4 · desde 2016</p>
@@ -629,7 +639,7 @@
   </div>
 
   <!-- EARLYBIRD -->
-  <div class="case">
+  <div id="earlybird" class="case">
     <div class="case-top">
       <div>
         <p class="fund-tag">Earlybird Venture Capital · Berlim · Nível 4</p>
@@ -686,7 +696,7 @@
     <p class="eyebrow">Emerging VC Fellows</p>
     <h2>Aprenda a aplicar IA em Venture Capital na prática</h2>
     <p>O EVCF é o programa que prepara a próxima geração de profissionais de VC com as competências que o mercado está exigindo agora.</p>
-    <a class="btn-cta" href="https://criteriosevcf.carrd.co/" target="_blank">Seja um Fellow →</a>
+    <a class="btn-cta" href="https://criteriosevcf.carrd.co/" target="_blank">Seja um Membro →</a>
   </div>
 </div>
 
@@ -776,7 +786,7 @@
       <li>Acesso a Managing Partners de fundos BR e globais</li>
       <li>Agenda trimestral exclusiva</li>
     </ul>
-    <a class="btn-cta" href="https://criteriosevcf.carrd.co/" target="_blank">Quero ser Fellow →</a>
+    <a class="btn-cta" href="https://criteriosevcf.carrd.co/" target="_blank">Quero ser Membro →</a>
   </div>
 </div>
 
@@ -802,7 +812,7 @@
   <div class="aws-inner">
     <p class="aws-label">Shared Vision Partner</p>
     <div class="aws-logo-wrap">
-      <img src="https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4600/3831ef80-b40b-4067-8c6a-34389ec673c9" alt="Amazon Web Services" style="height:48px;width:auto;filter:brightness(0) invert(1);opacity:0.9;" />
+      <img src="https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4600/3831ef80-b40b-4067-8c6a-34389ec673c9" alt="Amazon Web Services" style="height:48px;width:auto;opacity:0.9;background:transparent;margin-top:16px;" />
     </div>
     <div style="border: 2px dashed rgba(39,181,206,0.4); border-radius: 8px; padding: 48px 24px; margin-top: 8px; text-align: center;">
       <p style="color:rgba(255,255,255,0.4); font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; margin:0;">Conteúdo do parceiro em breve</p>
@@ -817,9 +827,9 @@
     </a>
     <div class="footer-partners">
       <span class="footer-partner-label">Parceiros</span>
-      <img src="https://abvcap.com.br/wp-content/uploads/2025/05/ABVCAP_marca_rgb.png" alt="ABVCAP" style="height:28px;width:auto;opacity:0.85;vertical-align:middle;filter:brightness(0) invert(1);" />
-      <img src="https://www.fmderraik.com.br/_2023/wp-content/themes/fm-derraik/img/logo-text.png?@3" alt="FM Derraik" style="height:28px;width:auto;opacity:0.85;vertical-align:middle;filter:brightness(0) invert(1);" />
-      <img src="https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4600/3831ef80-b40b-4067-8c6a-34389ec673c9" alt="AWS" style="height:28px;width:auto;filter:brightness(0) invert(1);opacity:0.85;vertical-align:middle;" />
+      <img src="https://abvcap.com.br/wp-content/uploads/2025/05/ABVCAP_marca_rgb.png" alt="ABVCAP" style="height:24px;width:auto;opacity:0.85;vertical-align:middle;filter:brightness(0) invert(1);" />
+      <img src="https://www.fmderraik.com.br/_2023/wp-content/themes/fm-derraik/img/logo-text.png?@3" alt="FM Derraik" style="height:20px;width:auto;opacity:0.85;vertical-align:middle;filter:brightness(0) invert(1);" />
+      <img src="https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4600/3831ef80-b40b-4067-8c6a-34389ec673c9" alt="AWS" style="height:24px;width:auto;filter:brightness(0) invert(1);opacity:0.85;vertical-align:middle;" />
     </div>
   </div>
   <div class="footer-bottom">
