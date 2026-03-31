@@ -203,7 +203,7 @@
     .ba-list.strong li { color: var(--ink); font-weight: 500; }
 
     /* ── JOURNEY ── */
-    .journey { display: grid; grid-template-columns: repeat(5,1fr); margin-top: 32px; border-top: 3px solid var(--cyan); }
+    .journey { display: grid; grid-template-columns: repeat(8,1fr); margin-top: 32px; border-top: 3px solid var(--cyan); }
     .j-step { padding: 16px 12px 16px 0; border-right: 1px solid var(--gray-10); }
     .j-step:last-child { border-right: none; }
     .j-n { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--cyan); letter-spacing: 0.1em; margin-bottom: 6px; }
@@ -332,8 +332,8 @@
     </div>
     <div>
       <p class="col-label">Realizado com apoio de</p>
-      <p>Esta pesquisa foi conduzida pelo EVCF com o objetivo de mapear como fundos de venture capital estão adotando inteligência artificial em suas operações — identificando padrões de maturidade, casos documentados e evidências da literatura aplicada ao contexto latino-americano.</p>
-      <p style="margin-top:16px;">Esta pesquisa não seria possível sem o apoio da AWS. Agradecemos à Amazon Web Services pelo suporte à infraestrutura e à comunidade de inovação no Brasil.</p>
+      <p>Esta pesquisa foi conduzida pelo Emerging VC Fellows com o objetivo de mapear como fundos de venture capital estão adotando inteligência artificial em suas operações, identificando padrões de maturidade, casos documentados e evidências da literatura aplicada ao contexto latino-americano.</p>
+      <p style="margin-top:16px;">A AWS é a parceira que tornou esta pesquisa possível. O apoio da Amazon Web Services ao EVCF reflete um compromisso compartilhado com o desenvolvimento do venture capital na América Latina.</p>
       <img src="https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4600/3831ef80-b40b-4067-8c6a-34389ec673c9" alt="Amazon Web Services" style="height:20px;width:auto;filter:brightness(0) grayscale(1) opacity(0.6);margin-top:16px;display:block;" />
       <a href="https://aws.amazon.com/startups" target="_blank" style="display:inline-block;margin-top:12px;font-size:13px;color:var(--cyan);text-decoration:none;border-bottom:1px solid var(--cyan-dim);">Conheça o AWS for Startups →</a>
     </div>
@@ -345,7 +345,7 @@
   <p class="eyebrow">01 — Justificativa para Adoção</p>
   <h2>Por que incorporar IA à operação de um fundo</h2>
 
-  <p>Venture capital opera sob alta incerteza, com informação incompleta e retornos altamente assimétricos. Historicamente, a seleção de investimentos combinou julgamento humano, rede de relacionamentos e acesso privilegiado a oportunidades. A digitalização do ecossistema empreendedor — plataformas de startups, redes profissionais, dados de financiamento e sinais digitais de tração — criou, contudo, um novo ambiente informacional que extrapola a capacidade de processamento humano.<sup>1</sup></p>
+  <p>Venture capital opera sob alta incerteza, com informação incompleta e retornos altamente assimétricos. Historicamente, a seleção de investimentos combinou julgamento humano, rede de relacionamentos e acesso privilegiado a oportunidades. A digitalização do ecossistema empreendedor criou, contudo, um novo ambiente informacional que extrapola a capacidade de processamento humano.<sup>1</sup></p>
 
   <p>Paralelamente, avanços em aprendizado de máquina e modelos de linguagem de grande escala tornaram viável o processamento sistemático desse volume de dados a custo decrescente. A questão central que se impõe aos gestores, portanto, não é se incorporar IA, mas como fazê-lo de forma teoricamente consistente, estrategicamente deliberada e operacionalmente sustentável.<sup>2</sup></p>
 
@@ -357,9 +357,9 @@
       <h4>Ampliação de cobertura</h4>
       <p>Sistemas de IA permitem monitorar ordens de grandeza a mais de sinais de mercado do que qualquer equipe humana conseguiria manualmente. Fundos como Earlybird relatam 95% de cobertura de oportunidades relevantes com o EagleEye, respondendo por 50% do deal flow ativo.</p>
       <h4>Redução de ruído decisório</h4>
-      <p>Algoritmos não sofrem fadiga, efeitos de ancoragem ou variações emocionais ao longo do dia. Kahneman, Sibony e Sunstein (2021) documentam como essa variabilidade — que denominam "ruído" — compromete a qualidade de decisões humanas em contextos de triagem repetitiva.<sup>3</sup></p>
+      <p>Algoritmos não sofrem fadiga, viés de ancoragem ou variações emocionais ao longo do dia. Kahneman, Sibony e Sunstein (2021) documentam como essa variabilidade compromete sistematicamente a qualidade de decisões humanas em contextos de triagem repetitiva, exatamente o que define o trabalho de um analista de VC.<sup>3</sup></p>
       <h4>Memória institucional persistente</h4>
-      <p>Ao contrário de analistas que saem e levam consigo o conhecimento acumulado, sistemas de IA bem configurados retêm contexto, padrões aprendidos e histórico de decisões de forma consultável e persistente entre sessões.</p>
+      <p>Sistemas de IA bem configurados retêm contexto, padrões aprendidos e histórico de decisões de forma consultável e persistente entre sessões, criando uma base de conhecimento que se acumula ao longo do tempo em vez de se perder.</p>
     </div>
     <div>
       <p class="col-label">Riscos e condições de contorno</p>
@@ -368,7 +368,7 @@
       <h4>Dependência de infraestrutura de terceiros</h4>
       <p>A adoção de modelos de linguagem como serviço implica dependência de fornecedores externos, com implicações para continuidade operacional, privacidade de dados de portfólio e controle sobre a infraestrutura de decisão do fundo.</p>
       <h4>Limites intrínsecos ao contexto de VC</h4>
-      <p>Modelos de linguagem aprendem com dados históricos e tendem a subestimar inovações radicais. Venture capital opera sob incerteza não mensurável — Knightiana — não apenas risco probabilístico. A IA produz estimativas condicionais, não certezas.<sup>5</sup></p>
+      <p>Modelos de linguagem aprendem com dados históricos e tendem a subestimar inovações radicais. Venture capital opera sob incerteza não mensurável, do tipo Knightiana, e não apenas risco probabilístico. A IA produz estimativas condicionais, não certezas.<sup>5</sup></p>
     </div>
   </div>
 
@@ -383,7 +383,7 @@
   <p class="eyebrow">02 — Framework de Maturidade</p>
   <h2>Quatro estágios de adoção de IA em fundos de VC</h2>
 
-  <p>A adoção de inteligência artificial em fundos de venture capital não ocorre de forma uniforme. Um erro recorrente consiste em confundir maturidade analítica com uso de IA avançada. A literatura aplicada indica que fundos bem-sucedidos constroem primeiro uma infraestrutura decisória sólida — histórico de decisões documentado, critérios explícitos de investimento e processos estruturados de comitê. A IA atua como camada de amplificação sobre essa base, não como substituto dela. Pesquisas indicam que fundos que adotam tecnologia de forma incremental apresentam melhor absorção organizacional e maior impacto prático.<sup>6</sup></p>
+  <p>A adoção de inteligência artificial em fundos de venture capital não ocorre de forma uniforme. Um erro recorrente consiste em confundir maturidade analítica com uso de IA avançada. A literatura aplicada indica que fundos bem-sucedidos constroem primeiro uma infraestrutura decisória sólida, com histórico de decisões documentado, critérios explícitos de investimento e processos estruturados de comitê. A IA atua como camada de amplificação sobre essa base, não como substituto dela. Pesquisas indicam que fundos que adotam tecnologia de forma incremental apresentam melhor absorção organizacional e maior impacto prático.<sup>6</sup></p>
 
   <table class="mat-table">
     <thead>
@@ -399,7 +399,7 @@
         <td><div class="mat-lv">1</div><div class="mat-nm">Intuitivo</div></td>
         <td>Networking e experiência pessoal como base primária de decisão. Ausência de dados estruturados sistematizados.</td>
         <td>Planilhas básicas, e-mail, notas avulsas.</td>
-        <td>Inteiramente humano. Processo difícil de auditar ou replicar.</td>
+        <td>Processo baseado em julgamento individual, com baixa rastreabilidade.</td>
       </tr>
       <tr>
         <td><div class="mat-lv">2</div><div class="mat-nm">Data-aware</div></td>
@@ -416,13 +416,13 @@
       <tr>
         <td><div class="mat-lv">4</div><div class="mat-nm">AI-augmented</div><div class="mat-case"><a href="#eqt">EQT</a></div><div class="mat-case" style="margin-left:4px;"><a href="#earlybird">Earlybird</a></div></td>
         <td>Infraestrutura proprietária com modelos customizados, equipe técnica dedicada e ciclo de feedback fechado. Scoring sistemático de oportunidades.</td>
-        <td>Plataformas próprias com NLP, redes neurais de grafos e arquitetura event-driven sobre 50+ fontes de dados integradas.</td>
-        <td>IA gera hipóteses de investimento com base em sinais quantitativos. Time valida e decide. Ciclo de aprendizado contínuo.</td>
+        <td>Plataformas proprietárias com NLP, redes neurais de grafos e arquitetura orientada a eventos para processamento contínuo de sinais de mercado.</td>
+        <td>IA gera hipóteses de investimento com base em sinais quantitativos, o time valida e decide. O ciclo de uso alimenta o aprendizado contínuo do sistema.</td>
       </tr>
     </tbody>
   </table>
 
-  <p style="margin-top:24px;">A maioria dos fundos early-stage europeus e brasileiros opera entre os níveis 1 e 2. Fundos no nível 3 são exceção — e os casos documentados no nível 4 são escassos, quase sempre associados a equipe técnica dedicada e capital disponível para investimento em infraestrutura.<sup>7</sup> A contribuição metodológica central desta pesquisa é demonstrar, por meio do caso da Point Nine Capital, que a transição do nível 2 para o nível 3 não requer engenheiro de ML nem orçamento de infraestrutura.</p>
+  <p style="margin-top:24px;">A maioria dos fundos early-stage europeus e brasileiros opera entre os níveis 1 e 2. Fundos no nível 3 são exceção, e os casos documentados no nível 4 são escassos, quase sempre associados a equipe técnica dedicada e capital disponível para investimento em infraestrutura.<sup>7</sup> A principal contribuição metodológica desta pesquisa é mostrar que a transição do nível 2 para o nível 3 é mais direta do que se imagina, sem necessidade de engenheiro de ML ou orçamento dedicado de infraestrutura.</p>
 </div>
 
 <!-- 03 — ARQUITETURA P9 -->
@@ -434,19 +434,14 @@
         <p class="fund-tag">Point Nine Capital · Berlim · Nível 3</p>
         <h3>P9 AI Command Center</h3>
       </div>
-      <div class="case-kpis">
-        <div><div class="kpi-n">0</div><div class="kpi-l">engenheiros dedicados</div></div>
-        <div><div class="kpi-n">5</div><div class="kpi-l">camadas de arquitetura</div></div>
-        <div><div class="kpi-n">90–95%</div><div class="kpi-l">do valor com 10% do esforço</div></div>
-      </div>
     </div>
     <p class="case-summary">Operação de IA construída por um Managing Partner sem equipe técnica, conectando Claude às ferramentas existentes do fundo via MCP em arquitetura de cinco camadas.</p>
     <button class="case-toggle" aria-expanded="false"><span class="toggle-label">ver mais</span> <span class="toggle-icon">↓</span></button>
     <div class="case-detail">
 
-  <p>O P9 AI Command Center é o sistema de IA operacional da Point Nine Capital, desenvolvido por Christoph Janz (Managing Partner) sem equipe de engenharia dedicada. O caso documenta a trajetória de adoção: uma primeira tentativa, mais complexa, com banco vetorial (Qdrant), RAG e servidor MCP customizado foi construída em 13 dias e posteriormente descontinuada. A conclusão foi que conectar as fontes de dados diretamente ao Claude via MCP entregava 90–95% do valor com 10% do esforço de manutenção.<sup>8</sup></p>
+  <p>O P9 AI Command Center é o sistema de IA operacional da Point Nine Capital, desenvolvido por Christoph Janz (Managing Partner) sem equipe de engenharia dedicada. O caso documenta uma trajetória de adoção direta: uma primeira tentativa, mais complexa, com banco vetorial (Qdrant), RAG e servidor MCP customizado foi construída em 13 dias e posteriormente descontinuada. A conclusão foi que conectar as fontes de dados diretamente ao Claude via MCP entregava a maior parte do valor com fração do esforço de manutenção.<sup>8</sup></p>
 
-  <p>A arquitetura resultante é composta por cinco camadas com funções distintas. O detalhamento abaixo discrimina, para cada camada, a tecnologia subjacente e as ferramentas que a implementam — distinção relevante para gestores que avaliam a replicabilidade do modelo.</p>
+  <p>A arquitetura resultante é composta por cinco camadas com funções distintas. O detalhamento abaixo discrimina, para cada camada, a tecnologia subjacente e as ferramentas que a implementam, distinção relevante para gestores que avaliam a replicabilidade do modelo.</p>
 
   <div class="layer-stack">
 
@@ -594,7 +589,7 @@
   <p class="eyebrow">04 — Cases Comparativos</p>
   <h2>EQT Ventures e Earlybird: nível 4 de maturidade</h2>
 
-  <p>Os dois casos a seguir representam o estágio mais avançado de adoção de IA em venture capital — nível 4 do framework de maturidade — e caracterizam-se pelo desenvolvimento de infraestrutura proprietária com equipes técnicas dedicadas. Diferem arquiteturalmente do caso Point Nine tanto em escala quanto em abordagem: enquanto a P9 conecta ferramentas existentes via protocolo aberto, EQT e Earlybird construíram plataformas próprias a partir de dados proprietários e modelos customizados.</p>
+  <p>Os dois cases a seguir representam o estágio mais avançado de adoção de IA em venture capital, o nível 4 do framework de maturidade, e caracterizam-se pelo desenvolvimento de infraestrutura proprietária com equipes técnicas dedicadas. Diferem arquiteturalmente do caso Point Nine tanto em escala quanto em abordagem: enquanto a P9 conecta ferramentas existentes via protocolo aberto, EQT e Earlybird construíram plataformas próprias a partir de dados proprietários e modelos customizados.</p>
 
   <!-- EQT -->
   <div id="eqt" class="case">
@@ -603,16 +598,12 @@
         <p class="fund-tag">EQT Ventures · Estocolmo · Nível 4 · desde 2016</p>
         <h3>Motherbrain</h3>
       </div>
-      <div class="case-kpis">
-        <div><div class="kpi-n">50M+</div><div class="kpi-l">empresas monitoradas</div></div>
-        <div><div class="kpi-n">~30</div><div class="kpi-l">pessoas na equipe técnica</div></div>
-      </div>
     </div>
-    <p class="case-summary">Plataforma event-driven que processa 50+ fontes de dados via machine learning para identificar oportunidades de investimento antes do mercado, em operação desde 2016.</p>
+    <p class="case-summary">Plataforma event-driven que processa múltiplas fontes de dados via machine learning para identificar oportunidades de investimento antes do mercado, em operação desde 2016.</p>
     <button class="case-toggle" aria-expanded="false"><span class="toggle-label">ver mais</span> <span class="toggle-icon">↓</span></button>
     <div class="case-detail">
-    <p>O Motherbrain é o sistema de inteligência artificial da EQT Ventures, em desenvolvimento desde 2016. Seu objetivo central é identificar empresas com potencial de investimento antes que o mercado as reconheça como tais — acessando oportunidades que não chegariam via warm introductions convencionais. A plataforma processa mais de 50 fontes de dados e aplica aprendizado de máquina para mapear métricas e padrões associados ao sucesso de investimentos anteriores.<sup>9</sup></p>
-    <p>A arquitetura é event-driven: dados de múltiplas fontes são ingeridos, fragmentados e enriquecidos em pipeline contínuo antes de chegar à interface dos investidores — acessível via Elasticsearch para consultas rápidas e BigQuery para análises ad hoc pelo time de Labs. O modelo PAUSE (Positive and Annealed Unlabeled Sentence Embedding), apresentado no EMNLP 2021, interpreta sinalizações de mercado a partir de texto não estruturado e alimenta o pipeline de scoring.<sup>10</sup></p>
+    <p>O Motherbrain é o sistema de inteligência artificial da EQT Ventures, em desenvolvimento desde 2016. Seu objetivo central é identificar empresas com potencial de investimento antes que o mercado as reconheça, acessando oportunidades que não chegariam via warm introductions convencionais. A plataforma aplica aprendizado de máquina para mapear métricas e padrões associados ao sucesso de investimentos anteriores.<sup>9</sup></p>
+    <p>A arquitetura é event-driven: dados de múltiplas fontes são ingeridos, fragmentados e enriquecidos em pipeline contínuo antes de chegar à interface dos investidores, acessível via Elasticsearch para consultas rápidas e BigQuery para análises ad hoc pelo time de Labs. O modelo PAUSE (Positive and Annealed Unlabeled Sentence Embedding), apresentado no EMNLP 2021, interpreta sinalizações de mercado a partir de texto não estruturado e alimenta o pipeline de scoring.<sup>10</sup></p>
     <div class="tech-stack">
       <div class="ts-col">
         <p class="ts-head">Tecnologias</p>
@@ -645,17 +636,12 @@
         <p class="fund-tag">Earlybird Venture Capital · Berlim · Nível 4</p>
         <h3>EagleEye</h3>
       </div>
-      <div class="case-kpis">
-        <div><div class="kpi-n">20M+</div><div class="kpi-l">founders avaliados</div></div>
-        <div><div class="kpi-n">95%</div><div class="kpi-l">cobertura de oportunidades</div></div>
-        <div><div class="kpi-n">200%</div><div class="kpi-l">ganho de eficiência operacional</div></div>
-      </div>
     </div>
-    <p class="case-summary">Plataforma proprietária que avalia 20M+ founders e responde por 50% do deal flow ativo — human-in-the-loop por convicção de design, não por limitação técnica.</p>
+    <p class="case-summary">Plataforma proprietária que avalia milhões de founders e responde por 50% do deal flow ativo, com abordagem human-in-the-loop por convicção de design.</p>
     <button class="case-toggle" aria-expanded="false"><span class="toggle-label">ver mais</span> <span class="toggle-icon">↓</span></button>
     <div class="case-detail">
-    <p>O EagleEye é a plataforma proprietária de IA e dados da Earlybird, desenvolvida internamente sob liderança do partner André Retterath. A premissa que orienta sua construção é que a maior parte das oportunidades de investimento relevantes já está representada em dados públicos — e que o problema não é escassez de informação, mas incapacidade de processá-la sistematicamente. O sistema cobre mais de dez milhões de empresas e avalia founders com base em trajetória profissional, sinais de tração e padrões extraídos de investimentos anteriores bem-sucedidos.</p>
-    <p>A plataforma responde por 50% do deal flow ativo do fundo. Importante notar que a Earlybird apresenta o EagleEye explicitamente como amplificador do processo humano de decisão — human-in-the-loop por convicção de design, não por limitação técnica. Esse posicionamento está alinhado com a evidência da literatura de que os melhores resultados emergem da combinação entre capacidade analítica de sistemas automatizados e julgamento qualitativo humano.<sup>6</sup></p>
+    <p>O EagleEye é a plataforma proprietária de IA e dados da Earlybird, desenvolvida internamente sob liderança do partner André Retterath. A premissa que orienta sua construção é que a maior parte das oportunidades de investimento relevantes já está representada em dados públicos e que o problema não é escassez de informação, mas incapacidade de processá-la sistematicamente. O sistema cobre mais de dez milhões de empresas e avalia founders com base em trajetória profissional, sinais de tração e padrões extraídos de investimentos anteriores bem-sucedidos.</p>
+    <p>A plataforma responde por 50% do deal flow ativo do fundo. A Earlybird posiciona o EagleEye explicitamente como amplificador do processo humano de decisão, human-in-the-loop por convicção de design e não por limitação técnica. Esse posicionamento está alinhado com a evidência da literatura de que os melhores resultados emergem da combinação entre capacidade analítica de sistemas automatizados e julgamento qualitativo humano.<sup>6</sup></p>
     <div class="tech-stack">
       <div class="ts-col">
         <p class="ts-head">Tecnologias</p>
@@ -685,8 +671,11 @@
     <div class="j-step"><p class="j-n">01</p><h4>Deal Sourcing</h4><p>Cobertura via NLP e sinais digitais. Acesso a oportunidades fora do circuito de introductions.</p></div>
     <div class="j-step"><p class="j-n">02</p><h4>Screening</h4><p>Scoring probabilístico e clusterização. IA filtra volume; investidor valida priorização.</p></div>
     <div class="j-step"><p class="j-n">03</p><h4>Due Diligence</h4><p>Análise de redes e verificação de claims. IA estrutura contexto; julgamento sobre o founder é humano.</p></div>
-    <div class="j-step"><p class="j-n">04</p><h4>Portfólio</h4><p>Alertas automáticos e monitoramento contínuo de KPIs sem custo marginal por empresa.</p></div>
-    <div class="j-step"><p class="j-n">05</p><h4>Exit &amp; Follow-on</h4><p>Simulação de cenários e apoio analítico de timing.<sup>11</sup> Decisão final permanece com o gestor.</p></div>
+    <div class="j-step"><p class="j-n">04</p><h4>Diligência Jurídica</h4><p>Revisão automatizada de contratos, cap tables e cláusulas críticas. Modelos de linguagem reduzem horas de trabalho manual sem substituir o advogado na negociação.</p></div>
+    <div class="j-step"><p class="j-n">05</p><h4>Portfólio</h4><p>Alertas automáticos e monitoramento contínuo de KPIs sem custo marginal por empresa.</p></div>
+    <div class="j-step"><p class="j-n">06</p><h4>Back Office</h4><p>Automação de relatórios para LPs, consolidação de dados financeiros e compliance. Tarefas que consumiam semanas tornam-se processos contínuos.</p></div>
+    <div class="j-step"><p class="j-n">07</p><h4>Fundraising</h4><p>Mapeamento e qualificação de LPs via análise de rede, geração de materiais personalizados e gestão de relacionamentos. IA identifica conexões; o relacionamento permanece humano.</p></div>
+    <div class="j-step"><p class="j-n">08</p><h4>Exit &amp; Follow-on</h4><p>Simulação de cenários e apoio analítico de timing.<sup>11</sup> Decisão final permanece com o gestor.</p></div>
   </div>
 </div>
 
@@ -705,18 +694,18 @@
   <p class="eyebrow">05 — Estrutura de Time</p>
   <h2>Modelos organizacionais para adoção de IA</h2>
 
-  <p>A introdução de IA em operações de VC não é unicamente uma questão tecnológica — é uma questão de design organizacional. Fundos que adicionam ferramentas sem redesenhar processos e responsabilidades consistentemente apresentam adoção fraca e resultados abaixo do potencial. O elemento comum em todos os casos bem-sucedidos analisados nesta pesquisa é a existência de um responsável explícito pela camada de IA, com processo documentado de aprendizado e critérios claros sobre onde a automação atua e onde a decisão é humana.</p>
+  <p>A introdução de IA em operações de VC não é unicamente uma questão tecnológica, é uma questão de design organizacional. Fundos que adicionam ferramentas sem redesenhar processos e responsabilidades consistentemente apresentam adoção fraca e resultados abaixo do potencial. O elemento comum em todos os casos bem-sucedidos analisados nesta pesquisa é a existência de um responsável explícito pela camada de IA, com processo documentado de aprendizado e critérios claros sobre onde a automação atua e onde a decisão é humana.</p>
 
   <div class="cols-3">
     <div>
-      <p class="col-label">2 a 6 partners</p>
+      <p class="col-label">2 a 6 pessoas</p>
       <h4>Modelo distribuído</h4>
       <p>Um partner ou analista sênior assume a função de AI lead sem exclusividade de tempo. Stack enxuta construída sobre ferramentas existentes, com integração via MCP ou n8n. O caso da Point Nine é o arquétipo desse modelo: zero engenheiro dedicado, arquitetura completa sobre ferramentas já em uso pelo fundo.</p>
     </div>
     <div>
       <p class="col-label">6 a 20 pessoas</p>
       <h4>Função dedicada</h4>
-      <p>Um profissional com perfil técnico cuida de integração de fontes, qualidade de dados e fluxos de automação. Não é necessariamente engenheiro de ML. O time de investimento opera como cliente interno, com inputs sobre prioridades. A cultura data-driven precisa ser promovida pelos partners para ter absorção efetiva.</p>
+      <p>Um profissional com perfil técnico cuida de integração de fontes, qualidade de dados e fluxos de automação, não necessariamente engenheiro de ML. O time de investimento opera como cliente interno, com inputs sobre prioridades. A cultura data-driven precisa ser promovida pelos partners para ter absorção efetiva.</p>
     </div>
     <div>
       <p class="col-label">20+ pessoas</p>
@@ -726,7 +715,7 @@
   </div>
 
   <h3>Governança mínima recomendada</h3>
-  <p>Independente do tamanho do fundo, três práticas de governança aparecem de forma consistente nos casos bem-sucedidos: separação explícita e rotulada entre recomendações da IA e decisões do investidor; revisão periódica dos critérios de scoring para identificação e correção de vieses emergentes; e política de dados que define explicitamente quais informações podem ser processadas por modelos externos e quais devem permanecer em infraestrutura controlada pelo fundo.</p>
+  <p>Independentemente do tamanho do fundo, três práticas de governança aparecem de forma consistente nos casos bem-sucedidos: separação explícita e rotulada entre recomendações da IA e decisões do investidor; revisão periódica dos critérios de scoring para identificação e correção de vieses emergentes; e política de dados que define explicitamente quais informações podem ser processadas por modelos externos e quais devem permanecer em infraestrutura controlada pelo fundo.</p>
 </div>
 
 <!-- 06 — O ANALISTA (dark section) -->
@@ -735,10 +724,10 @@
     <p class="eyebrow">06 — O Analista na Transição</p>
     <h2>Reconfiguração do perfil profissional em VC</h2>
 
-    <p>A adoção de IA em fundos de venture capital não elimina a função do analista — mas altera estruturalmente o perfil de competências que gera valor. O profissional cujo diferencial era volume de processamento (triagem de inbound, pesquisa de mercado, produção de memos, atualização de CRM) vê esse conjunto de atividades progressivamente absorvido por sistemas automatizados. O que passa a ser escasso é um conjunto diferente de capacidades.</p>
+    <p>A adoção de IA em fundos de venture capital não elimina a função do analista, mas altera estruturalmente o perfil de competências que gera valor. O profissional cujo diferencial era volume de processamento, como triagem de inbound, pesquisa de mercado, produção de memos e atualização de CRM, vê esse conjunto de atividades progressivamente absorvido por sistemas automatizados. O que passa a ser escasso é um conjunto diferente de capacidades.</p>
 
     <div class="pullquote">
-      <p>"O profissional de VC que prospera nesse contexto não é o que acumula mais conhecimento de mercado nos primeiros anos — é o que desenvolve a capacidade de construir os sistemas que monitoram esse mercado por ele."</p>
+      <p>"O profissional de VC que prospera nesse contexto não é o que acumula mais conhecimento de mercado nos primeiros anos, é o que desenvolve a capacidade de construir os sistemas que monitoram esse mercado por ele."</p>
       <cite>Síntese dos casos documentados e da literatura analisada nesta pesquisa</cite>
     </div>
 
@@ -751,23 +740,23 @@
           <li>Redação de memos e decks como atividade central</li>
           <li>Outreach padronizado sem qualificação prévia de dados</li>
           <li>Planilhas como ferramenta analítica mais sofisticada disponível</li>
-          <li>Sênioridade medida exclusivamente em anos de experiência</li>
+          <li>Senioridade medida exclusivamente em anos de experiência</li>
         </ul>
       </div>
       <div>
         <p class="ba-head accent">Competências em ascensão de relevância</p>
         <ul class="ba-list strong">
-          <li>Capacidade de construir e automatizar fluxos de trabalho operacionais</li>
-          <li>Curadoria, interpretação e validação de outputs de sistemas de IA</li>
-          <li>Configuração de prompts e sistemas como entregável; memos são gerados, não redigidos</li>
-          <li>Qualificação de contatos por dados estruturados antes do primeiro contato</li>
-          <li>Familiaridade operacional com protocolos de integração, APIs e LLMs</li>
-          <li>Sênioridade medida em capacidade de alavancagem via sistemas construídos</li>
+          <li>Capacidade de orquestrar e revisar outputs de sistemas de IA</li>
+          <li>Julgamento qualitativo sobre pessoas, dinâmicas e timing de mercado</li>
+          <li>Construção e automação de fluxos operacionais com ferramentas acessíveis</li>
+          <li>Qualificação de oportunidades por dados estruturados antes do primeiro contato</li>
+          <li>Comunicação clara de teses de investimento em contextos de alta ambiguidade</li>
+          <li>Senioridade medida em capacidade de alavancagem e qualidade de decisão</li>
         </ul>
       </div>
     </div>
 
-    <p style="margin-top:28px;">Essa reconfiguração não implica que conhecimento de domínio perdeu relevância. A IA demonstra limitações consistentes em julgamento qualitativo sobre pessoas, em leitura de dinâmicas de poder em cap tables e em percepção de momentum de categoria antes que os dados o confirmem. Essas são as apostas centrais de fundos early-stage — e elas continuam exigindo o que sistemas automatizados não possuem: intuição calibrada por experiência acumulada.</p>
+    <p style="margin-top:28px;">Essa reconfiguração não implica que conhecimento de domínio perdeu relevância. A IA demonstra limitações consistentes em julgamento qualitativo sobre pessoas, em leitura de dinâmicas de poder em cap tables e em percepção de momentum de categoria antes que os dados o confirmem. Essas são as apostas centrais de fundos early-stage e elas continuam exigindo o que sistemas automatizados não possuem: intuição calibrada por experiência acumulada.</p>
 
     <p>Para gestores, essa reconfiguração tem implicação direta sobre critérios de contratação: o próximo analista a incorporar ao time provavelmente não é o que apresenta o maior repertório de conhecimento setorial nos primeiros anos, mas o que demonstra maior velocidade de aprendizado, maior facilidade na construção de ferramentas e maior consciência sobre onde reside o custo de oportunidade da atenção humana no processo de investimento.</p>
 
@@ -800,7 +789,7 @@
   <div class="fn"><span class="fn-n">5.</span><span class="fn-t">Metrick, A., &amp; Yasuda, A. (2021). <em>Venture Capital and the Finance of Innovation</em> (3rd ed.). Wiley. Sobre incerteza Knightiana vs. risco probabilístico em VC.</span></div>
   <div class="fn"><span class="fn-n">6.</span><span class="fn-t">Houser, K. A., &amp; Kisska-Schulze, K. (2022). <em>Disrupting Venture Capital: Carrots, Sticks and Artificial Intelligence.</em> SSRN / UC Irvine Law Review.</span></div>
   <div class="fn"><span class="fn-n">7.</span><span class="fn-t">Cao, L., von Ehrenheim, V., Krakowski, S., Li, X., &amp; Lutz, A. (2022). <em>Using Deep Learning to Find the Next Unicorn: A Practical Synthesis.</em> arXiv:2210.14195.</span></div>
-  <div class="fn"><span class="fn-n">8.</span><span class="fn-t">Janz, C. (2026, jan.). <em>Some Learnings from Vibe Coding a Knowledge Hub in 13 Days.</em> Point Nine Land. Também: Janz, C. (2026, fev.). <em>AI Killed My SaaS.</em> Point Nine Land. <a href="https://medium.com/point-nine-news/ai-killed-my-saas-55646a9a7522" target="_blank">medium.com/point-nine-news</a></span></div>
+  <div class="fn"><span class="fn-n">8.</span><span class="fn-t">Janz, C. (2026, jan.). <em>Some Learnings from Vibe Coding a Knowledge Hub in 13 Days.</em> Point Nine Land. Também: Janz, C. (2026, fev.). <em>AI Killed My SaaS.</em> Point Nine Land. Apresentado no Data Driven VC Summit 2026. <a href="https://medium.com/point-nine-news/ai-killed-my-saas-55646a9a7522" target="_blank">medium.com/point-nine-news</a></span></div>
   <div class="fn"><span class="fn-n">9.</span><span class="fn-t">EQT Group. (2021). <em>EQT's AI platform Motherbrain pushes the boundaries of the private markets with novel algorithm for better decision-making.</em> <a href="https://eqtgroup.com/about/motherbrain" target="_blank">eqtgroup.com</a></span></div>
   <div class="fn"><span class="fn-n">10.</span><span class="fn-t">Cao, L., Larsson, E., von Ehrenheim, V., Rocha, D. D. C., Martin, A., &amp; Horn, S. (2021). <em>PAUSE: Positive and Annealed Unlabeled Sentence Embedding.</em> EMNLP 2021. Association for Computational Linguistics.</span></div>
   <div class="fn"><span class="fn-n">11.</span><span class="fn-t">Cao, L., Horn, S., von Ehrenheim, V., Stahl, R. A., &amp; Landgren, H. (2022). <em>Simulation-Informed Revenue Extrapolation with Confidence Estimate for Scaleup Companies Using Scarce Time-Series Data.</em> CIKM '22. ACM.</span></div>
