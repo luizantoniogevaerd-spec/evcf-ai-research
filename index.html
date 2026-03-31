@@ -689,6 +689,226 @@
   </div>
 </div>
 
+<!-- WORKFLOW -->
+<section id="workflow" style="padding: 80px 0; background: #fff;">
+  <div style="max-width: 900px; margin: 0 auto; padding: 0 40px;">
+
+    <div style="margin-bottom: 48px;">
+      <div style="font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #27b5ce; font-weight: 600; margin-bottom: 12px;">IA na prática</div>
+      <h2 style="font-size: 28px; font-weight: 700; color: #1e2d5e; margin-bottom: 8px;">Como um fundo opera com IA</h2>
+      <p style="font-size: 15px; color: #666; max-width: 640px; line-height: 1.6;">Comparativo entre as ferramentas consolidadas no mercado brasileiro em 2023 e a camada de IA que se integra a cada etapa do processo.</p>
+    </div>
+
+    <!-- INFOGRÁFICO 1 -->
+    <div style="margin-bottom: 56px;">
+      <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #999; margin-bottom: 10px; display: grid; grid-template-columns: 148px 1fr 1fr; gap: 0; padding: 0 0 8px; border-bottom: 1px solid #e8e8e8;">
+        <span>Processo</span>
+        <span style="padding-left: 12px;">VC Tech Stack · 2023</span>
+        <span style="padding-left: 12px;">VC Tech Stack AI</span>
+      </div>
+
+      <!-- ROW TEMPLATE: stage | tools | ai -->
+      <style>
+        .wf-row { display: grid; grid-template-columns: 148px 1fr 1fr; margin-bottom: 3px; align-items: stretch; }
+        .wf-stage { background: #1e2d5e; color: #fff; border-radius: 8px 0 0 8px; padding: 14px 12px; display: flex; flex-direction: column; justify-content: center; }
+        .wf-stage-num { font-size: 9px; letter-spacing: 0.12em; opacity: 0.4; margin-bottom: 2px; }
+        .wf-stage-name { font-size: 13px; font-weight: 600; line-height: 1.3; }
+        .wf-tools { padding: 12px; display: flex; flex-wrap: wrap; gap: 5px; align-items: center; background: #f7f7f6; border: 1px solid #e8e8e8; border-left: none; }
+        .wf-ai { padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; background: rgba(39,181,206,0.04); border: 1px solid rgba(39,181,206,0.2); border-left: none; border-radius: 0 8px 8px 0; }
+        .wf-chip { font-size: 11px; padding: 3px 9px; border-radius: 4px; border: 1px solid #ddd; background: #fff; color: #555; white-space: nowrap; }
+        .wf-badge { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 3px; white-space: nowrap; flex-shrink: 0; }
+        .wf-b-llm { background: rgba(30,45,94,0.08); border: 1px solid rgba(30,45,94,0.2); color: #1e2d5e; }
+        .wf-b-conn { background: rgba(39,181,206,0.12); border: 1px solid rgba(39,181,206,0.35); color: #0a7a8f; }
+        .wf-b-crm { background: rgba(30,45,94,0.06); border: 1px solid rgba(30,45,94,0.15); color: #1e2d5e; }
+        .wf-b-aut { background: rgba(39,181,206,0.08); border: 1px solid rgba(39,181,206,0.25); color: #0a7a8f; }
+        .wf-b-res { background: rgba(30,45,94,0.1); border: 1px solid rgba(30,45,94,0.22); color: #1e2d5e; }
+        .wf-b-tra { background: #f2f2f0; border: 1px solid #ccc; color: #555; }
+        .wf-b-pres { background: rgba(39,181,206,0.06); border: 1px solid rgba(39,181,206,0.2); color: #0a7a8f; }
+        .wf-ai-line { display: flex; align-items: center; gap: 8px; }
+        .wf-ai-desc { font-size: 11px; color: #666; line-height: 1.4; }
+        .wf-cite { margin-top: 12px; font-size: 10px; color: #aaa; font-style: italic; }
+      </style>
+
+      <div class="wf-row">
+        <div class="wf-stage"><div class="wf-stage-num">01</div><div class="wf-stage-name">Deal sourcing</div></div>
+        <div class="wf-tools"><span class="wf-chip">Crunchbase</span><span class="wf-chip">PitchBook</span><span class="wf-chip">Distrito</span><span class="wf-chip">LinkedIn Sales Nav</span></div>
+        <div class="wf-ai">
+          <div class="wf-ai-line"><span class="wf-badge wf-b-res">Research</span><span class="wf-ai-desc">Análise de mercado e monitoramento de sinais</span></div>
+          <div class="wf-ai-line"><span class="wf-badge wf-b-aut">Automação</span><span class="wf-ai-desc">Alertas automáticos por setor e palavra-chave</span></div>
+        </div>
+      </div>
+
+      <div class="wf-row">
+        <div class="wf-stage"><div class="wf-stage-num">02</div><div class="wf-stage-name">Pipeline</div></div>
+        <div class="wf-tools"><span class="wf-chip">Airtable</span><span class="wf-chip">Affinity</span><span class="wf-chip">Notion</span><span class="wf-chip">HubSpot</span><span class="wf-chip">Pipefy</span></div>
+        <div class="wf-ai">
+          <div class="wf-ai-line"><span class="wf-badge wf-b-llm">LLM</span><span class="wf-ai-desc">Scoring de startups e geração de memo inicial</span></div>
+          <div class="wf-ai-line"><span class="wf-badge wf-b-crm">CRM com IA</span><span class="wf-ai-desc">Enriquecimento e priorização automática</span></div>
+          <div class="wf-ai-line"><span class="wf-badge wf-b-conn">Conector</span><span class="wf-ai-desc">LLM integrado ao CRM via MCP</span></div>
+        </div>
+      </div>
+
+      <div class="wf-row">
+        <div class="wf-stage"><div class="wf-stage-num">03</div><div class="wf-stage-name">Gestão de portfólio</div></div>
+        <div class="wf-tools"><span class="wf-chip">Excel</span><span class="wf-chip">Google Workspace</span><span class="wf-chip">Airtable</span><span class="wf-chip">Investory.io</span></div>
+        <div class="wf-ai">
+          <div class="wf-ai-line"><span class="wf-badge wf-b-conn">Conector</span><span class="wf-ai-desc">LLM conectado às planilhas via MCP para alertas de KPIs</span></div>
+          <div class="wf-ai-line"><span class="wf-badge wf-b-aut">Automação</span><span class="wf-ai-desc">Coleta e consolidação de dados das investidas</span></div>
+        </div>
+      </div>
+
+      <div class="wf-row">
+        <div class="wf-stage"><div class="wf-stage-num">04</div><div class="wf-stage-name">Research &amp; data</div></div>
+        <div class="wf-tools"><span class="wf-chip">CB Insights</span><span class="wf-chip">Crunchbase</span><span class="wf-chip">Statista</span><span class="wf-chip">SlingHub</span></div>
+        <div class="wf-ai">
+          <div class="wf-ai-line"><span class="wf-badge wf-b-res">Research</span><span class="wf-ai-desc">Síntese de relatórios e benchmarks de mercado</span></div>
+          <div class="wf-ai-line"><span class="wf-badge wf-b-llm">LLM</span><span class="wf-ai-desc">Análise de dados não estruturados e tendências</span></div>
+        </div>
+      </div>
+
+      <div class="wf-row">
+        <div class="wf-stage"><div class="wf-stage-num">05</div><div class="wf-stage-name">Gestão de pessoas</div></div>
+        <div class="wf-tools"><span class="wf-chip">Gupy</span><span class="wf-chip">LinkedIn</span><span class="wf-chip">Qulture.Rocks</span></div>
+        <div class="wf-ai">
+          <div class="wf-ai-line"><span class="wf-badge wf-b-llm">LLM</span><span class="wf-ai-desc">Triagem de candidatos e geração de job descriptions</span></div>
+        </div>
+      </div>
+
+      <div class="wf-row">
+        <div class="wf-stage"><div class="wf-stage-num">06</div><div class="wf-stage-name">Comunidade</div></div>
+        <div class="wf-tools"><span class="wf-chip">WhatsApp</span><span class="wf-chip">Google Meet</span><span class="wf-chip">Mailchimp</span><span class="wf-chip">Zoom</span></div>
+        <div class="wf-ai">
+          <div class="wf-ai-line"><span class="wf-badge wf-b-tra">Transcrição</span><span class="wf-ai-desc">Resumo automático de eventos e reuniões</span></div>
+          <div class="wf-ai-line"><span class="wf-badge wf-b-llm">LLM</span><span class="wf-ai-desc">Criação de conteúdo e newsletters</span></div>
+        </div>
+      </div>
+
+      <div class="wf-row">
+        <div class="wf-stage"><div class="wf-stage-num">07</div><div class="wf-stage-name">Fundraising</div></div>
+        <div class="wf-tools"><span class="wf-chip">Google Docs</span><span class="wf-chip">Excel</span><span class="wf-chip">Notion</span><span class="wf-chip">LinkedIn</span></div>
+        <div class="wf-ai">
+          <div class="wf-ai-line"><span class="wf-badge wf-b-llm">LLM</span><span class="wf-ai-desc">Geração e revisão de materiais para LPs</span></div>
+          <div class="wf-ai-line"><span class="wf-badge wf-b-pres">Apresentações</span><span class="wf-ai-desc">Criação automática de decks para LPs</span></div>
+          <div class="wf-ai-line"><span class="wf-badge wf-b-crm">CRM com IA</span><span class="wf-ai-desc">Mapeamento e qualificação de LPs via rede</span></div>
+        </div>
+      </div>
+
+      <div class="wf-row">
+        <div class="wf-stage" style="border-radius: 8px 0 0 8px;"><div class="wf-stage-num">08</div><div class="wf-stage-name">Back office</div></div>
+        <div class="wf-tools"><span class="wf-chip">Google Workspace</span><span class="wf-chip">Airtable</span><span class="wf-chip">Carta</span><span class="wf-chip">SAP</span></div>
+        <div class="wf-ai">
+          <div class="wf-ai-line"><span class="wf-badge wf-b-aut">Automação</span><span class="wf-ai-desc">Automação de processos repetitivos e compliance</span></div>
+          <div class="wf-ai-line"><span class="wf-badge wf-b-llm">LLM</span><span class="wf-ai-desc">Relatórios internos e síntese de documentos</span></div>
+        </div>
+      </div>
+
+      <div class="wf-cite">VC Tech Stack · 2023 — EVCF · 102 respondentes · 70 gestoras do Brasil · data base abril 2023</div>
+    </div>
+
+    <!-- INFOGRÁFICO 2 -->
+    <div style="margin-bottom: 48px;">
+      <h3 style="font-size: 18px; font-weight: 700; color: #1e2d5e; margin-bottom: 16px;">Categorias de IA e ferramentas disponíveis</h3>
+
+      <style>
+        .ai-row { display: grid; grid-template-columns: 148px 1fr 1fr; margin-bottom: 3px; align-items: stretch; }
+        .ai-cat { background: #1e2d5e; border-radius: 8px 0 0 8px; padding: 14px 12px; display: flex; flex-direction: column; justify-content: center; }
+        .ai-cat-name { font-size: 13px; font-weight: 600; color: #fff; line-height: 1.3; }
+        .ai-cat-sub { font-size: 10px; margin-top: 3px; line-height: 1.4; color: rgba(39,181,206,0.85); }
+        .ai-tools { padding: 12px; display: flex; flex-wrap: wrap; gap: 5px; align-items: center; background: #f7f7f6; border: 1px solid #e8e8e8; border-left: none; }
+        .ai-chip { font-size: 11px; padding: 3px 9px; border-radius: 4px; font-weight: 500; background: rgba(30,45,94,0.07); border: 1px solid rgba(30,45,94,0.18); color: #1e2d5e; white-space: nowrap; }
+        .ai-uses { padding: 10px 12px; display: flex; flex-direction: column; gap: 5px; background: rgba(39,181,206,0.04); border: 1px solid rgba(39,181,206,0.2); border-left: none; border-radius: 0 8px 8px 0; }
+        .ai-use-item { font-size: 11px; color: #666; line-height: 1.4; display: flex; align-items: flex-start; gap: 6px; }
+        .ai-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; background: #27b5ce; }
+        .ai-disclaimer { margin-top: 14px; padding: 12px 16px; border-radius: 6px; background: rgba(39,181,206,0.05); border: 1px solid rgba(39,181,206,0.22); font-size: 11px; color: #666; line-height: 1.7; display: flex; gap: 10px; align-items: flex-start; }
+        .ai-disclaimer-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; color: #27b5ce; }
+      </style>
+
+      <div style="font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #999; margin-bottom: 10px; display: grid; grid-template-columns: 148px 1fr 1fr; padding: 0 0 8px; border-bottom: 1px solid #e8e8e8;">
+        <span>Categoria</span>
+        <span style="padding-left: 12px;">Ferramentas</span>
+        <span style="padding-left: 12px;">Casos de uso em VC</span>
+      </div>
+
+      <div class="ai-row">
+        <div class="ai-cat"><div class="ai-cat-name">LLM</div><div class="ai-cat-sub">Modelos de linguagem generalistas</div></div>
+        <div class="ai-tools"><span class="ai-chip">Claude</span><span class="ai-chip">ChatGPT</span><span class="ai-chip">Gemini</span></div>
+        <div class="ai-uses">
+          <div class="ai-use-item"><span class="ai-dot"></span>Geração de investment memos a partir de pitch decks</div>
+          <div class="ai-use-item"><span class="ai-dot"></span>Revisão de contratos e identificação de cláusulas críticas</div>
+          <div class="ai-use-item"><span class="ai-dot"></span>Pesquisa de mercado, benchmarks e análise de tendências</div>
+          <div class="ai-use-item"><span class="ai-dot"></span>Rascunho de relatórios trimestrais para LPs</div>
+        </div>
+      </div>
+
+      <div class="ai-row">
+        <div class="ai-cat"><div class="ai-cat-name">Research</div><div class="ai-cat-sub">Inteligência de mercado com IA</div></div>
+        <div class="ai-tools"><span class="ai-chip">Perplexity</span><span class="ai-chip">Harmonic</span></div>
+        <div class="ai-uses">
+          <div class="ai-use-item"><span class="ai-dot"></span>Análise de mercado, TAM/SAM e benchmarks em tempo real</div>
+          <div class="ai-use-item"><span class="ai-dot"></span>Identificação de fundadores e sinais de tração pré-radar</div>
+          <div class="ai-use-item"><span class="ai-dot"></span>Monitoramento de contratações, patentes e movimentos de mercado</div>
+        </div>
+      </div>
+
+      <div class="ai-row">
+        <div class="ai-cat"><div class="ai-cat-name">Conectores</div><div class="ai-cat-sub">Integração de ferramentas via MCP</div></div>
+        <div class="ai-tools"><span class="ai-chip">Claude via MCP</span><span class="ai-chip">ChatGPT via MCP</span><span class="ai-chip">Gemini via MCP</span><span class="ai-chip">OpenAI API</span></div>
+        <div class="ai-uses">
+          <div class="ai-use-item"><span class="ai-dot"></span>LLM conectado ao CRM para scoring automático no pipeline</div>
+          <div class="ai-use-item"><span class="ai-dot"></span>Memória institucional persistente entre sessões</div>
+          <div class="ai-use-item"><span class="ai-dot"></span>Alertas de KPIs do portfólio sem infraestrutura própria</div>
+        </div>
+      </div>
+
+      <div class="ai-row">
+        <div class="ai-cat"><div class="ai-cat-name">Automação</div><div class="ai-cat-sub">No-code / low-code com IA</div></div>
+        <div class="ai-tools"><span class="ai-chip">n8n</span><span class="ai-chip">Make</span><span class="ai-chip">Zapier AI</span></div>
+        <div class="ai-uses">
+          <div class="ai-use-item"><span class="ai-dot"></span>Alertas automáticos de novas rodadas no setor de interesse</div>
+          <div class="ai-use-item"><span class="ai-dot"></span>Coleta e consolidação de KPIs mensais das investidas</div>
+          <div class="ai-use-item"><span class="ai-dot"></span>Fluxos de onboarding de founders no portfólio</div>
+        </div>
+      </div>
+
+      <div class="ai-row">
+        <div class="ai-cat"><div class="ai-cat-name">CRM com IA</div><div class="ai-cat-sub">Relacionamento com IA embarcada</div></div>
+        <div class="ai-tools"><span class="ai-chip">Affinity AI</span><span class="ai-chip">Clay</span><span class="ai-chip">HubSpot AI</span></div>
+        <div class="ai-uses">
+          <div class="ai-use-item"><span class="ai-dot"></span>Enriquecimento automático de perfis de founders e empresas</div>
+          <div class="ai-use-item"><span class="ai-dot"></span>Priorização do pipeline por score de fit com a tese</div>
+          <div class="ai-use-item"><span class="ai-dot"></span>Mapeamento e qualificação de LPs via análise de rede</div>
+        </div>
+      </div>
+
+      <div class="ai-row">
+        <div class="ai-cat"><div class="ai-cat-name">Transcrição</div><div class="ai-cat-sub">Captura e síntese de reuniões</div></div>
+        <div class="ai-tools"><span class="ai-chip">Granola</span><span class="ai-chip">Otter.ai</span><span class="ai-chip">Fireflies</span></div>
+        <div class="ai-uses">
+          <div class="ai-use-item"><span class="ai-dot"></span>Resumo automático de calls com founders com action items</div>
+          <div class="ai-use-item"><span class="ai-dot"></span>Registro de follow-ups direto no CRM pós-reunião</div>
+          <div class="ai-use-item"><span class="ai-dot"></span>Histórico consultável de todas as interações com startups</div>
+        </div>
+      </div>
+
+      <div class="ai-row">
+        <div class="ai-cat" style="border-radius: 8px 0 0 8px;"><div class="ai-cat-name">Apresentações</div><div class="ai-cat-sub">Criação de decks com IA</div></div>
+        <div class="ai-tools"><span class="ai-chip">Gamma</span><span class="ai-chip">Canva</span></div>
+        <div class="ai-uses">
+          <div class="ai-use-item"><span class="ai-dot"></span>Criação de decks de LP updates a partir de texto ou dados</div>
+          <div class="ai-use-item"><span class="ai-dot"></span>Geração de apresentações para reuniões de comitê</div>
+          <div class="ai-use-item"><span class="ai-dot"></span>Formatação automática de investment memos em slides</div>
+        </div>
+      </div>
+
+      <div class="ai-disclaimer">
+        <span class="ai-disclaimer-icon">⚠</span>
+        <span>Os outputs gerados por ferramentas de IA devem sempre passar por revisão humana antes de qualquer uso em processos decisórios. Modelos de linguagem podem cometer erros factuais, omitir informações relevantes ou introduzir vieses. A responsabilidade pela decisão de investimento permanece com o gestor.</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- 05 — TIME -->
 <div id="time" class="block reveal">
   <p class="eyebrow">05 — Estrutura de Time</p>
