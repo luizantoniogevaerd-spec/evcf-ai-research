@@ -274,6 +274,59 @@
     .reveal.visible { opacity: 1; transform: none; }
 
     /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      /* 1. Navbar */
+      nav { padding: 0 16px; }
+      .nav-links { display: none; }
+
+      /* 2. Hero */
+      .hero { padding: 40px 24px; }
+      .hero::after { display: none; }
+      .hero-inner { max-width: 100%; }
+      .hero h1 { font-size: 36px; }
+
+      /* 3. EVCF / cols-2 layout */
+      .cols-2, .cols-3, .ba, .decision-row, .tech-stack, .layer-cols { grid-template-columns: 1fr; }
+      .ts-col + .ts-col { padding-left: 0; border-left: none; border-top: 1px solid var(--gray-10); }
+      .lc + .lc { padding-left: 0; border-left: none; border-top: 1px solid var(--gray-10); }
+
+      /* 4. Maturity table – scrollable */
+      #maturidade { overflow-x: auto; }
+      .mat-table { min-width: 700px; }
+
+      /* 5. Workflow infographics – stacked columns */
+      .wf-row, .ai-row { grid-template-columns: 1fr !important; }
+      .wf-stage { border-radius: 8px !important; }
+      .wf-tools { border-radius: 8px !important; border-left: 1px solid #e8e8e8 !important; margin-top: 2px; }
+      .wf-ai { border-radius: 8px !important; border-left: 1px solid rgba(39,181,206,0.2) !important; margin-top: 2px; }
+      .ai-cat { border-radius: 8px !important; }
+      .ai-tools { border-radius: 8px !important; border-left: 1px solid #e8e8e8 !important; margin-top: 2px; }
+      .ai-uses { border-radius: 8px !important; border-left: 1px solid rgba(39,181,206,0.2) !important; margin-top: 2px; border-radius: 8px !important; }
+
+      /* 6. Journey – horizontal scroll */
+      .journey { display: block; overflow-x: auto; white-space: nowrap; }
+      .j-step { display: inline-block; vertical-align: top; width: 160px; white-space: normal; }
+
+      /* 7 & 8 already covered by cols-2 / cols-3 rule above */
+
+      /* 9. General section padding */
+      .block { padding: 48px 20px; }
+      .block.dark .block-inner { padding: 48px 20px; }
+      #workflow { padding: 48px 20px !important; }
+
+      /* 10. Lang switcher */
+      .lang-switcher { margin-right: 8px; }
+      .lang-btn { font-size: 11px; padding: 3px 7px; }
+
+      /* misc */
+      .arch-grid { grid-template-columns: 1fr; }
+      .aq:nth-child(even) { border-right: none; }
+      .case-top { flex-direction: column; }
+      .case-kpis { flex-direction: row; }
+      .footer-top { flex-direction: column; align-items: flex-start; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
     @media (max-width: 680px) {
       :root { --side: 22px; }
       .nav-links { display: none; }
