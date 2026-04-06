@@ -24,8 +24,8 @@
       --side:      72px;
     }
 
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--ink); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
+    body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--ink); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
     /* ── NAV ── */
     nav {
@@ -275,71 +275,75 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      /* 1. Navbar */
       nav { padding: 0 16px; }
       .nav-links { display: none; }
+      .nav-cta { font-size: 11.5px; padding: 6px 12px; }
 
-      /* 2. Hero */
-      .hero { padding: 40px 24px; }
+      .hero { padding: 100px 20px 60px; }
       .hero::after { display: none; }
       .hero-inner { max-width: 100%; }
-      .hero h1 { font-size: 36px; }
+      .hero h1 { font-size: clamp(28px, 8vw, 36px); }
+      .hero-lead { font-size: 15px; }
+      .hero-actions { flex-direction: column; align-items: stretch; gap: 12px; }
+      .btn-cta, .btn-ghost { text-align: center; padding: 14px 20px; font-size: 14px; }
 
-      /* 3. EVCF / cols-2 layout */
-      .cols-2, .cols-3, .ba, .decision-row, .tech-stack, .layer-cols { grid-template-columns: 1fr; }
-      .ts-col + .ts-col { padding-left: 0; border-left: none; border-top: 1px solid var(--gray-10); }
-      .lc + .lc { padding-left: 0; border-left: none; border-top: 1px solid var(--gray-10); }
+      .cols-2, .cols-3, .ba, .decision-row, .tech-stack, .layer-cols, .arch-grid { grid-template-columns: 1fr; }
+      .ts-col + .ts-col { padding-left: 0; border-left: none; padding-top: 16px; border-top: 1px solid var(--gray-10); }
+      .lc + .lc { padding-left: 0; border-left: none; padding-top: 14px; border-top: 1px solid var(--gray-10); }
+      .dc { border-right: none; border-bottom: 1px solid var(--gray-10); padding-bottom: 18px; }
+      .dc:last-child { border-bottom: none; }
+      .aq { border-right: none; }
+      .aq:nth-last-child(-n+2) { border-bottom: 1px solid var(--gray-10); }
+      .aq:last-child { border-bottom: none; }
 
-      /* 4. Maturity table – scrollable */
-      #maturidade { overflow-x: auto; }
-      .mat-table { min-width: 700px; }
+      .mat-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .mat-table { min-width: 640px; }
 
-      /* 5. Workflow infographics – stacked columns */
       .wf-row, .ai-row { grid-template-columns: 1fr !important; }
-      .wf-stage { border-radius: 8px !important; }
-      .wf-tools { border-radius: 8px !important; border-left: 1px solid #e8e8e8 !important; margin-top: 2px; }
-      .wf-ai { border-radius: 8px !important; border-left: 1px solid rgba(39,181,206,0.2) !important; margin-top: 2px; }
-      .ai-cat { border-radius: 8px !important; }
-      .ai-tools { border-radius: 8px !important; border-left: 1px solid #e8e8e8 !important; margin-top: 2px; }
-      .ai-uses { border-radius: 8px !important; border-left: 1px solid rgba(39,181,206,0.2) !important; margin-top: 2px; border-radius: 8px !important; }
+      .wf-stage { border-radius: 8px 8px 0 0 !important; }
+      .wf-tools { border-radius: 0 !important; border-left: none !important; border-top: 1px solid #e8e8e8 !important; margin-top: 0; }
+      .wf-ai { border-radius: 0 0 8px 8px !important; border-left: none !important; border-top: 1px solid rgba(39,181,206,0.2) !important; margin-top: 0; }
+      .ai-cat { border-radius: 8px 8px 0 0 !important; }
+      .ai-tools { border-radius: 0 !important; border-left: none !important; border-top: 1px solid #e8e8e8 !important; margin-top: 0; }
+      .ai-uses { border-radius: 0 0 8px 8px !important; border-left: none !important; border-top: 1px solid rgba(39,181,206,0.2) !important; margin-top: 0; }
 
-      /* 6. Journey – horizontal scroll */
-      .journey { display: block; overflow-x: auto; white-space: nowrap; }
-      .j-step { display: inline-block; vertical-align: top; width: 160px; white-space: normal; }
+      .journey-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 8px; }
+      .journey { display: flex; min-width: max-content; border-top: 3px solid var(--cyan); margin-top: 32px; }
+      .j-step { width: 150px; flex-shrink: 0; white-space: normal; padding: 14px 10px 14px 0; border-right: 1px solid var(--gray-10); }
+      .j-step:last-child { border-right: none; }
 
-      /* 7 & 8 already covered by cols-2 / cols-3 rule above */
+      .layer-head { flex-wrap: wrap; gap: 8px; }
+      .layer-sub { margin-left: 0; width: 100%; }
 
-      /* 9. General section padding */
+      .case-top { flex-direction: column; gap: 12px; }
+      .case-kpis { flex-wrap: wrap; gap: 16px; }
+
       .block { padding: 48px 20px; }
       .block.dark .block-inner { padding: 48px 20px; }
       #workflow { padding: 48px 20px !important; }
+      .cta-banner { padding: 56px 20px; }
+      .aws-section { padding: 56px 20px; }
+      footer { padding: 36px 20px 28px; }
+      .footnotes { padding: 36px 20px 24px; }
 
-      /* 10. Lang switcher */
-      .lang-switcher { margin-right: 8px; }
+      .lang-switcher { margin-right: 6px; }
       .lang-btn { font-size: 11px; padding: 3px 7px; }
-
-      /* misc */
-      .arch-grid { grid-template-columns: 1fr; }
-      .aq:nth-child(even) { border-right: none; }
-      .case-top { flex-direction: column; }
-      .case-kpis { flex-direction: row; }
       .footer-top { flex-direction: column; align-items: flex-start; }
       .footer-bottom { flex-direction: column; align-items: flex-start; }
+      h2 { font-size: clamp(22px, 6vw, 32px); }
+      h3 { font-size: 17px; }
+      .pullquote p { font-size: 17px; }
+      .pullquote { padding-left: 14px; }
     }
 
-    @media (max-width: 680px) {
-      :root { --side: 22px; }
-      .nav-links { display: none; }
-      .footer-top { flex-direction: column; align-items: flex-start; }
-      .footer-bottom { flex-direction: column; align-items: flex-start; }
-      .cols-2, .cols-3, .ba, .decision-row, .tech-stack, .layer-cols { grid-template-columns: 1fr; }
-      .ts-col + .ts-col { padding-left: 0; border-left: none; border-top: 1px solid var(--gray-10); }
-      .lc + .lc { padding-left: 0; border-left: none; border-top: 1px solid var(--gray-10); }
-      .arch-grid { grid-template-columns: 1fr; }
-      .aq:nth-child(even) { border-right: none; }
-      .journey { grid-template-columns: 1fr 1fr; }
-      .case-top { flex-direction: column; }
-      .case-kpis { flex-direction: row; }
+    @media (max-width: 420px) {
+      nav { padding: 0 12px; }
+      .nav-cta { display: none; }
+      .hero { padding: 90px 16px 48px; }
+      .block { padding: 40px 16px; }
+      .block.dark .block-inner { padding: 40px 16px; }
+      #workflow { padding: 40px 16px !important; }
+      .lang-switcher { margin-right: 0; }
     }
   </style>
 </head>
@@ -447,6 +451,7 @@
 
   <p data-i18n="s02_p1">A adoção de inteligência artificial em fundos de venture capital não ocorre de forma uniforme. Um erro recorrente consiste em confundir maturidade analítica com uso de IA avançada. Com base nos casos analisados e na literatura revisada, a IA aparece menos como substituta do processo decisório e mais como camada de amplificação sobre uma base já estruturada de dados, critérios e rotinas. Mais do que uma tipologia consolidada na literatura, esses níveis funcionam como modelo analítico para distinguir uso pontual de ferramenta de maturidade operacional efetiva.<sup>1</sup></p>
 
+  <div class="mat-table-wrap">
   <table class="mat-table">
     <thead>
       <tr>
@@ -483,6 +488,7 @@
       </tr>
     </tbody>
   </table>
+  </div>
 
   <p style="margin-top:24px;" data-i18n="s02_p2">Nos casos analisados, os níveis 3 e 4 ainda aparecem como exceção. Em muitos contextos, o uso de IA segue concentrado em ferramentas pontuais ou em operações com alguma estrutura de dados, mas sem integração mais profunda ao processo decisório. Uma leitura que emerge dos casos documentados é que a transição do nível 2 para o nível 3 pode ser mais acessível do que muitos fundos supõem, especialmente quando a adoção parte da integração com ferramentas já existentes.<sup>7</sup></p>
 </div>
@@ -729,6 +735,7 @@
 
   <h3 style="margin-top:48px;" data-i18n="journey_h3">IA ao longo da jornada do investidor</h3>
   <p data-i18n="journey_p">Nos três cases analisados, a IA opera de forma distinta em cada etapa do processo de investimento. O mapeamento abaixo sintetiza onde a automação é mais eficaz e onde o julgamento humano permanece central.</p>
+  <div class="journey-wrap">
   <div class="journey">
     <div class="j-step"><p class="j-n">01</p><h4 data-i18n="j1_h4">Deal Sourcing</h4><p data-i18n="j1_p">Cobertura via NLP e sinais digitais. Acesso a oportunidades fora do circuito de introductions.</p></div>
     <div class="j-step"><p class="j-n">02</p><h4 data-i18n="j2_h4">Screening</h4><p data-i18n="j2_p">Scoring probabilístico e clusterização. IA filtra volume; investidor valida priorização.</p></div>
@@ -738,6 +745,7 @@
     <div class="j-step"><p class="j-n">06</p><h4 data-i18n="j6_h4">Back Office</h4><p data-i18n="j6_p">Parte dessas rotinas pode migrar de atividades periódicas e manuais para processos mais contínuos e estruturados.</p></div>
     <div class="j-step"><p class="j-n">07</p><h4 data-i18n="j7_h4">Fundraising</h4><p data-i18n="j7_p">A IA pode apoiar o mapeamento inicial de LPs, a personalização de materiais e a organização do histórico de relacionamento. A construção de confiança, no entanto, permanece essencialmente humana.</p></div>
     <div class="j-step"><p class="j-n">08</p><h4 data-i18n="j8_h4">Exit &amp; Follow-on</h4><p data-i18n="j8_p">Sistemas analíticos podem apoiar a construção de cenários e a comparação entre hipóteses em decisões de follow-on e liquidez, sem substituir o julgamento final do gestor.</p></div>
+  </div>
   </div>
 </div>
 
