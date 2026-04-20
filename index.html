@@ -495,6 +495,68 @@
   <p style="margin-top:24px;" data-i18n="s02_p2">Nos casos analisados, os níveis 3 e 4 ainda aparecem como exceção. Em muitos contextos, o uso de IA segue concentrado em ferramentas pontuais ou em operações com alguma estrutura de dados, mas sem integração mais profunda ao processo decisório. Uma leitura que emerge dos casos documentados é que a transição do nível 2 para o nível 3 pode ser mais acessível do que muitos fundos supõem, especialmente quando a adoção parte da integração com ferramentas já existentes.<sup>7</sup></p>
 </div>
 
+<!-- GLOSSÁRIO -->
+<div id="glossario" style="margin-bottom: 32px;">
+  <div style="font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-bottom: 12px;">Glossário de termos</div>
+  <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
+
+    <style>
+      .gl-item { position: relative; display: inline-block; }
+      .gl-pill { font-size: 12px; font-weight: 500; color: #1e2d5e; padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(30,45,94,0.2); background: #f7f7f6; cursor: default; transition: all .15s; white-space: nowrap; display: inline-block; }
+      .gl-item:hover .gl-pill { background: #1e2d5e; color: #fff; border-color: #1e2d5e; }
+      .gl-tooltip { position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); width: 260px; background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 12px 14px; opacity: 0; pointer-events: none; transition: opacity .15s; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+      .gl-item:hover .gl-tooltip { opacity: 1; }
+      .gl-tt-term { font-size: 12px; font-weight: 600; color: #1e2d5e; margin-bottom: 1px; }
+      .gl-tt-acro { font-size: 10px; color: #27b5ce; margin-bottom: 6px; }
+      .gl-tt-def { font-size: 11px; color: #666; line-height: 1.55; }
+      .gl-tt-arrow { position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%) rotate(45deg); width: 8px; height: 8px; background: #fff; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd; }
+      .gl-hint { font-size: 10px; color: #aaa; margin-top: 8px; font-style: italic; }
+    </style>
+
+    <div class="gl-item">
+      <span class="gl-pill">LLM</span>
+      <div class="gl-tooltip"><div class="gl-tt-term">LLM</div><div class="gl-tt-acro">Large Language Model</div><div class="gl-tt-def">Modelo de IA treinado em grandes volumes de texto para compreender e gerar linguagem natural. Claude, ChatGPT e Gemini são exemplos. Nos cases, são a camada central de raciocínio dos sistemas.</div><div class="gl-tt-arrow"></div></div>
+    </div>
+
+    <div class="gl-item">
+      <span class="gl-pill">MCP</span>
+      <div class="gl-tooltip"><div class="gl-tt-term">MCP</div><div class="gl-tt-acro">Model Context Protocol</div><div class="gl-tt-def">Protocolo aberto que padroniza como LLMs se conectam a ferramentas externas sem infraestrutura proprietária. No case P9, conecta Claude ao CRM, e-mail e planilhas do fundo em uma arquitetura de cinco camadas.</div><div class="gl-tt-arrow"></div></div>
+    </div>
+
+    <div class="gl-item">
+      <span class="gl-pill">RAG</span>
+      <div class="gl-tooltip"><div class="gl-tt-term">RAG</div><div class="gl-tt-acro">Retrieval-Augmented Generation</div><div class="gl-tt-def">Técnica em que o modelo recupera documentos de uma base de dados antes de gerar resposta, em vez de depender apenas do treinamento. Testada e descartada no case P9 em favor de conexão direta via MCP.</div><div class="gl-tt-arrow"></div></div>
+    </div>
+
+    <div class="gl-item">
+      <span class="gl-pill">NLP</span>
+      <div class="gl-tooltip"><div class="gl-tt-term">NLP</div><div class="gl-tt-acro">Natural Language Processing</div><div class="gl-tt-def">Área da IA focada na interpretação de texto não estruturado. Base técnica do modelo PAUSE da EQT e da camada de inteligência do EagleEye da Earlybird para leitura de sinais de mercado.</div><div class="gl-tt-arrow"></div></div>
+    </div>
+
+    <div class="gl-item">
+      <span class="gl-pill">Human-in-the-loop</span>
+      <div class="gl-tooltip"><div class="gl-tt-term">Human-in-the-loop</div><div class="gl-tt-acro">Arquitetura de decisão</div><div class="gl-tt-def">Sistema em que a IA recomenda e o humano decide. No case Earlybird, é escolha de design do EagleEye por convicção, não limitação técnica. Padrão de governança recomendado nesta pesquisa.</div><div class="gl-tt-arrow"></div></div>
+    </div>
+
+    <div class="gl-item">
+      <span class="gl-pill">Event-driven</span>
+      <div class="gl-tooltip"><div class="gl-tt-term">Event-driven</div><div class="gl-tt-acro">Arquitetura de software</div><div class="gl-tt-def">Sistema que processa dados continuamente à medida que chegam, não em lotes periódicos. Arquitetura do Motherbrain da EQT: fontes são ingeridas em fluxo contínuo antes de chegarem ao time de investimento.</div><div class="gl-tt-arrow"></div></div>
+    </div>
+
+    <div class="gl-item">
+      <span class="gl-pill">PAUSE</span>
+      <div class="gl-tooltip"><div class="gl-tt-term">PAUSE</div><div class="gl-tt-acro">Positive and Annealed Unlabeled Sentence Embedding</div><div class="gl-tt-def">Modelo de representação semântica de texto desenvolvido pela EQT Ventures, apresentado no EMNLP 2021. Interpreta sinais textuais não estruturados de mercado dentro da infraestrutura do Motherbrain.</div><div class="gl-tt-arrow"></div></div>
+    </div>
+
+    <div class="gl-item">
+      <span class="gl-pill">Embeddings</span>
+      <div class="gl-tooltip"><div class="gl-tt-term">Embeddings</div><div class="gl-tt-acro">Representação vetorial de texto</div><div class="gl-tt-def">Representação de texto como vetores numéricos que capturam seu significado semântico, permitindo comparar documentos por similaridade de conteúdo. Base técnica do PAUSE e de sistemas de memória institucional.</div><div class="gl-tt-arrow"></div></div>
+    </div>
+
+  </div>
+  <div class="gl-hint">Passe o mouse sobre cada termo para ver a definição.</div>
+</div>
+
 <!-- 03 — ARQUITETURA P9 -->
 <div id="p9" class="block reveal">
   <p class="eyebrow" data-i18n="s03_eyebrow">03 — Anatomia de uma Operação de IA</p>
