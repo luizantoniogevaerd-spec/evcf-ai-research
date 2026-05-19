@@ -574,14 +574,20 @@
         body: JSON.stringify(finalData),
       });
 
-      if (!resp.ok) throw new Error('Erro ao salvar dados');
+      const data = await resp.json().catch(() => ({}));
+
+      if (!resp.ok) {
+        console.error('Erro da API:', data);
+        throw new Error(data.error ? JSON.stringify(data.error) : 'Erro ao salvar dados');
+      }
 
       document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
       document.getElementById('success').classList.add('active');
       setTimeout(() => { window.location.href = '/?acesso=liberado'; }, 1500);
     } catch (err) {
+      console.error('submitForm error:', err);
       if (btn) { btn.disabled = false; btn.textContent = 'Liberar acesso →'; }
-      alert('Ocorreu um erro. Tente novamente.');
+      alert('Ocorreu um erro: ' + err.message);
     }
   }
 
