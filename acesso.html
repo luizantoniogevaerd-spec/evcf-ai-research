@@ -583,7 +583,7 @@
 
       document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
       document.getElementById('success').classList.add('active');
-      setTimeout(() => { window.location.href = '/?acesso=liberado'; }, 1500);
+      setTimeout(() => { window.location.href = '/?acesso=liberado#conteudo-exclusivo'; }, 1500);
     } catch (err) {
       console.error('submitForm error:', err);
       if (btn) { btn.disabled = false; btn.textContent = 'Liberar acesso →'; }
