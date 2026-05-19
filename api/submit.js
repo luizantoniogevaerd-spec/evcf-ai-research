@@ -24,7 +24,7 @@ module.exports = async function handler(req, res) {
   };
 
   if (estagio_fundo)   fields['Estágio do Fundo']   = estagio_fundo;
-  if (tamanho_cheque)  fields['Tamanho de Cheque']   = tamanho_cheque;
+  if (tamanho_cheque)  fields['Tamanho do Cheque']   = tamanho_cheque;
   if (estagio_startup) fields['Estágio da Startup']  = estagio_startup;
   if (vertical)        fields['Vertical da Startup'] = vertical;
   if (ja_captou !== undefined && ja_captou !== '') {
