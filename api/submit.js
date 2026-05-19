@@ -23,12 +23,12 @@ module.exports = async function handler(req, res) {
     'Perfil': perfil,
   };
 
-  if (estagio_fundo)   fields['Estágio do Fundo']   = estagio_fundo;
-  if (tamanho_cheque)  fields['Tamanho do Cheque']   = tamanho_cheque;
-  if (estagio_startup) fields['Estágio da Startup']  = estagio_startup;
-  if (vertical)        fields['Vertical da Startup'] = vertical;
+  if (estagio_fundo)   fields['Est\u00e1gio do Fundo']    = estagio_fundo;
+  if (tamanho_cheque)  fields['Tamanho do Cheque']         = tamanho_cheque;
+  if (estagio_startup) fields['Est\u00e1gio da Startup']   = estagio_startup;
+  if (vertical)        fields['Vertical da Startup']        = vertical;
   if (ja_captou !== undefined && ja_captou !== '') {
-    fields['Já captou?'] = ja_captou === 'sim' || ja_captou === true;
+    fields['J\u00e1 captou?'] = ja_captou === 'sim' || ja_captou === true;
   }
 
   const token = process.env.AIRTABLE_TOKEN;
