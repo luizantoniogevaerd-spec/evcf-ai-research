@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acesso ao Conteúdo · Emerging VC Fellows</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:      #1e2d5e;
+      --navy-dark: #161f44;
+      --navy-nav:  #252e47;
+      --cyan:      #27b5ce;
+      --cyan-dim:  rgba(39,181,206,0.15);
+      --white:     #ffffff;
+      --off:       #f4f6fa;
+      --ink:       #111827;
+      --gray-60:   #4b5563;
+      --gray-40:   #9ca3af;
+      --gray-10:   #e5e7eb;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--off);
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--navy-nav);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 72px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-brand {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+    }
+
+    /* MAIN */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 24px;
+    }
+
+    .form-card {
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+      width: 100%;
+      max-width: 520px;
+      padding: 48px 44px;
+    }
+
+    /* PROGRESS */
+    .progress-bar {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 36px;
+    }
+    .progress-step {
+      flex: 1;
+      height: 3px;
+      background: var(--gray-10);
+      border-radius: 2px;
+      transition: background .3s;
+    }
+    .progress-step.active { background: var(--cyan); }
+
+    /* HEADING */
+    .form-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 10px;
+    }
+    .form-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.25;
+      margin-bottom: 6px;
+    }
+    .form-subtitle {
+      font-size: 14px;
+      color: var(--gray-60);
+      line-height: 1.65;
+      margin-bottom: 32px;
+    }
+
+    /* FIELDS */
+    .field { margin-bottom: 20px; }
+    label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px;
+      letter-spacing: 0.01em;
+    }
+    label .opt {
+      font-weight: 400;
+      color: var(--gray-40);
+      font-size: 11px;
+      margin-left: 4px;
+    }
+    input[type="text"],
+    input[type="email"],
+    select {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--gray-10);
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14.5px;
+      color: var(--ink);
+      background: var(--white);
+      outline: none;
+      transition: border-color .18s, box-shadow .18s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    input:focus, select:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 3px var(--cyan-dim);
+    }
+    input::placeholder { color: var(--gray-40); }
+
+    /* RADIO CARDS */
+    .radio-group { display: flex; flex-direction: column; gap: 10px; }
+    .radio-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border: 1.5px solid var(--gray-10);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: border-color .18s, background .18s;
+    }
+    .radio-card:hover { border-color: var(--cyan); background: var(--cyan-dim); }
+    .radio-card input[type="radio"] { display: none; }
+    .radio-card.selected { border-color: var(--cyan); background: var(--cyan-dim); }
+    .radio-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid var(--gray-10);
+      flex-shrink: 0;
+      transition: border-color .18s, background .18s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .radio-card.selected .radio-dot {
+      border-color: var(--cyan);
+      background: var(--cyan);
+    }
+    .radio-dot::after {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #fff;
+      display: none;
+    }
+    .radio-card.selected .radio-dot::after { display: block; }
+    .radio-label { font-size: 14.5px; font-weight: 500; color: var(--ink); }
+    .radio-desc { font-size: 12px; color: var(--gray-40); margin-top: 1px; }
+
+    /* CHECKBOX */
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      padding: 12px 16px;
+      border: 1.5px solid var(--gray-10);
+      border-radius: 10px;
+      transition: border-color .18s;
+    }
+    .checkbox-row:hover { border-color: var(--cyan); }
+    .checkbox-row input[type="checkbox"] { display: none; }
+    .checkbox-box {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 2px solid var(--gray-10);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .18s, border-color .18s;
+    }
+    .checkbox-row.checked .checkbox-box {
+      background: var(--cyan);
+      border-color: var(--cyan);
+    }
+    .checkbox-row.checked .checkbox-box::after {
+      content: '✓';
+      font-size: 11px;
+      color: #fff;
+      font-weight: 700;
+    }
+    .checkbox-label { font-size: 14.5px; font-weight: 500; color: var(--ink); }
+
+    /* BUTTONS */
+    .btn-row { display: flex; gap: 12px; margin-top: 32px; }
+    .btn-back {
+      flex: 1;
+      padding: 14px;
+      border: 1.5px solid var(--gray-10);
+      border-radius: 8px;
+      background: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--gray-60);
+      cursor: pointer;
+      transition: border-color .18s, color .18s;
+    }
+    .btn-back:hover { border-color: var(--gray-40); color: var(--ink); }
+    .btn-next {
+      flex: 2;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: var(--cyan);
+      font-family: 'Inter', sans-serif;
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--navy-dark);
+      cursor: pointer;
+      transition: background .18s, transform .15s;
+      letter-spacing: 0.01em;
+    }
+    .btn-next:hover { background: #1fa0b8; transform: translateY(-1px); }
+    .btn-next:disabled { background: var(--gray-10); color: var(--gray-40); cursor: not-allowed; transform: none; }
+
+    /* ERROR */
+    .field-error {
+      font-size: 12px;
+      color: #e53e3e;
+      margin-top: 5px;
+      display: none;
+    }
+    .field-error.visible { display: block; }
+
+    /* STEP */
+    .step { display: none; }
+    .step.active { display: block; }
+
+    /* SUCCESS */
+    .success-state {
+      display: none;
+      text-align: center;
+      padding: 20px 0;
+    }
+    .success-state.active { display: block; }
+    .success-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--cyan-dim);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 26px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy-dark);
+      padding: 24px 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    footer p {
+      font-size: 11.5px;
+      color: rgba(255,255,255,0.35);
+    }
+    footer a { color: var(--cyan); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 20px; }
+      .form-card { padding: 32px 24px; }
+      footer { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-brand">Emerging VC Fellows × AWS</a>
+</nav>
+
+<main>
+  <div class="form-card">
+
+    <!-- PROGRESS BAR -->
+    <div class="progress-bar">
+      <div class="progress-step active" id="pb1"></div>
+      <div class="progress-step" id="pb2"></div>
+      <div class="progress-step" id="pb3"></div>
+    </div>
+
+    <!-- STEP 1: Dados básicos -->
+    <div class="step active" id="step1">
+      <p class="form-eyebrow">Etapa 1 de 3</p>
+      <h1 class="form-title">Acesse o conteúdo completo</h1>
+      <p class="form-subtitle">Preencha os dados abaixo para liberar a análise completa sobre arquitetura multi-modelo e estratégia de IA para startups.</p>
+
+      <div class="field">
+        <label for="nome">Nome completo</label>
+        <input type="text" id="nome" placeholder="Seu nome" autocomplete="name" />
+        <div class="field-error" id="err-nome">Por favor, insira seu nome.</div>
+      </div>
+      <div class="field">
+        <label for="email">E-mail profissional</label>
+        <input type="email" id="email" placeholder="voce@empresa.com" autocomplete="email" />
+        <div class="field-error" id="err-email">Por favor, insira um e-mail válido.</div>
+      </div>
+      <div class="field">
+        <label for="empresa">Empresa / Organização</label>
+        <input type="text" id="empresa" placeholder="Nome da empresa" autocomplete="organization" />
+        <div class="field-error" id="err-empresa">Por favor, insira o nome da empresa.</div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-next" id="btn1">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Perfil -->
+    <div class="step" id="step2">
+      <p class="form-eyebrow">Etapa 2 de 3</p>
+      <h2 class="form-title">Qual é o seu perfil?</h2>
+      <p class="form-subtitle">Isso nos ajuda a personalizar conteúdos futuros para você.</p>
+
+      <div class="radio-group" id="perfil-group">
+        <label class="radio-card" data-value="Fundo de VC">
+          <input type="radio" name="perfil" value="Fundo de VC" />
+          <div class="radio-dot"></div>
+          <div>
+            <div class="radio-label">Fundo de VC</div>
+            <div class="radio-desc">Gestor, partner, analista ou associado</div>
+          </div>
+        </label>
+        <label class="radio-card" data-value="Startup">
+          <input type="radio" name="perfil" value="Startup" />
+          <div class="radio-dot"></div>
+          <div>
+            <div class="radio-label">Startup</div>
+            <div class="radio-desc">Fundador, C-level ou time de produto/tech</div>
+          </div>
+        </label>
+        <label class="radio-card" data-value="Outro">
+          <input type="radio" name="perfil" value="Outro" />
+          <div class="radio-dot"></div>
+          <div>
+            <div class="radio-label">Outro</div>
+            <div class="radio-desc">Aceleradora, corporação, consultor ou pesquisador</div>
+          </div>
+        </label>
+      </div>
+      <div class="field-error" id="err-perfil" style="margin-top:8px;">Selecione um perfil para continuar.</div>
+
+      <div class="btn-row">
+        <button class="btn-back" id="back2">← Voltar</button>
+        <button class="btn-next" id="btn2">Continuar →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3A: Fundo de VC -->
+    <div class="step" id="step3a">
+      <p class="form-eyebrow">Etapa 3 de 3</p>
+      <h2 class="form-title">Sobre o seu fundo</h2>
+      <p class="form-subtitle">Detalhes opcionais para personalizar sua experiência.</p>
+
+      <div class="field">
+        <label for="estagio-fundo">Estágio preferido de investimento</label>
+        <select id="estagio-fundo">
+          <option value="" disabled selected>Selecione…</option>
+          <option value="Pre-seed">Pre-seed</option>
+          <option value="Seed">Seed</option>
+          <option value="Series A">Series A</option>
+          <option value="Series B+">Series B+</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="tamanho-cheque">Tamanho médio de cheque <span class="opt">opcional</span></label>
+        <input type="text" id="tamanho-cheque" placeholder="Ex: US$ 500k – 2M" />
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-back" id="back3a">← Voltar</button>
+        <button class="btn-next" id="btn3a">Liberar acesso →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3B: Startup -->
+    <div class="step" id="step3b">
+      <p class="form-eyebrow">Etapa 3 de 3</p>
+      <h2 class="form-title">Sobre a sua startup</h2>
+      <p class="form-subtitle">Ajuda-nos a entender o estágio e o contexto do seu negócio.</p>
+
+      <div class="field">
+        <label for="estagio-startup">Estágio atual</label>
+        <select id="estagio-startup">
+          <option value="" disabled selected>Selecione…</option>
+          <option value="Pre-seed">Pre-seed</option>
+          <option value="Seed">Seed</option>
+          <option value="Series A">Series A</option>
+          <option value="Series B+">Series B+</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="vertical">Vertical</label>
+        <select id="vertical">
+          <option value="" disabled selected>Selecione…</option>
+          <option value="Fintech">Fintech</option>
+          <option value="Healthtech">Healthtech</option>
+          <option value="Edtech">Edtech</option>
+          <option value="SaaS">SaaS</option>
+          <option value="Outro">Outro</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Já captou alguma rodada?</label>
+        <label class="checkbox-row" id="ja-captou-row">
+          <input type="checkbox" id="ja-captou" />
+          <div class="checkbox-box"></div>
+          <span class="checkbox-label">Sim, já captamos investimento</span>
+        </label>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-back" id="back3b">← Voltar</button>
+        <button class="btn-next" id="btn3b">Liberar acesso →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3C: Outro (sem etapa adicional, apenas envio) -->
+    <div class="step" id="step3c">
+      <p class="form-eyebrow">Etapa 3 de 3</p>
+      <h2 class="form-title">Quase lá!</h2>
+      <p class="form-subtitle">Clique abaixo para liberar o acesso ao conteúdo completo sobre arquitetura multi-modelo e GenAI para startups.</p>
+
+      <div class="btn-row">
+        <button class="btn-back" id="back3c">← Voltar</button>
+        <button class="btn-next" id="btn3c">Liberar acesso →</button>
+      </div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="success-state" id="success">
+      <div class="success-icon">✓</div>
+      <h2 class="form-title" style="margin-bottom:8px;">Acesso liberado!</h2>
+      <p class="form-subtitle">Redirecionando para o conteúdo…</p>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>© 2025 Emerging VC Fellows · <a href="/">Voltar para a pesquisa</a></p>
+  <p>Conteúdo produzido em parceria com AWS for Startups</p>
+</footer>
+
+<script>
+  // ── STATE ──
+  const state = { nome: '', email: '', empresa: '', perfil: '', estagio_fundo: '', tamanho_cheque: '', estagio_startup: '', vertical: '', ja_captou: false };
+  let currentStep = 1;
+
+  // ── HELPERS ──
+  function showStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.progress-step').forEach((p, i) => p.classList.toggle('active', i < n));
+    const map = { 1: 'step1', 2: 'step2', '3a': 'step3a', '3b': 'step3b', '3c': 'step3c' };
+    const el = document.getElementById('step' + n);
+    if (el) el.classList.add('active');
+  }
+
+  function showError(id, show) {
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle('visible', show);
+  }
+
+  function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+  // ── PROGRESS BAR ──
+  function setProgress(filled) {
+    document.querySelectorAll('.progress-step').forEach((p, i) => p.classList.toggle('active', i < filled));
+  }
+
+  // ── STEP 1 ──
+  document.getElementById('btn1').addEventListener('click', () => {
+    const nome = document.getElementById('nome').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const empresa = document.getElementById('empresa').value.trim();
+    let ok = true;
+    if (!nome) { showError('err-nome', true); ok = false; } else showError('err-nome', false);
+    if (!isValidEmail(email)) { showError('err-email', true); ok = false; } else showError('err-email', false);
+    if (!empresa) { showError('err-empresa', true); ok = false; } else showError('err-empresa', false);
+    if (!ok) return;
+    state.nome = nome; state.email = email; state.empresa = empresa;
+    currentStep = 2;
+    showStep(2); setProgress(2);
+  });
+
+  // ── RADIO CARDS ──
+  document.querySelectorAll('.radio-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.radio-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      state.perfil = card.dataset.value;
+      card.querySelector('input').checked = true;
+      showError('err-perfil', false);
+    });
+  });
+
+  // ── STEP 2 ──
+  document.getElementById('back2').addEventListener('click', () => { currentStep = 1; showStep(1); setProgress(1); });
+  document.getElementById('btn2').addEventListener('click', () => {
+    if (!state.perfil) { showError('err-perfil', true); return; }
+    setProgress(3);
+    if (state.perfil === 'Fundo de VC') { currentStep = '3a'; showStep('3a'); }
+    else if (state.perfil === 'Startup') { currentStep = '3b'; showStep('3b'); }
+    else { currentStep = '3c'; showStep('3c'); }
+  });
+
+  // ── CHECKBOX ──
+  const jaCaptouRow = document.getElementById('ja-captou-row');
+  const jaCaptouInput = document.getElementById('ja-captou');
+  jaCaptouRow.addEventListener('click', () => {
+    jaCaptouInput.checked = !jaCaptouInput.checked;
+    state.ja_captou = jaCaptouInput.checked;
+    jaCaptouRow.classList.toggle('checked', jaCaptouInput.checked);
+  });
+
+  // ── SUBMIT ──
+  async function submitForm(finalData) {
+    const btn = document.querySelector('.step.active .btn-next');
+    if (btn) { btn.disabled = true; btn.textContent = 'Enviando…'; }
+
+    try {
+      const resp = await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(finalData),
+      });
+
+      if (!resp.ok) throw new Error('Erro ao salvar dados');
+
+      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+      document.getElementById('success').classList.add('active');
+      setTimeout(() => { window.location.href = '/?acesso=liberado'; }, 1500);
+    } catch (err) {
+      if (btn) { btn.disabled = false; btn.textContent = 'Liberar acesso →'; }
+      alert('Ocorreu um erro. Tente novamente.');
+    }
+  }
+
+  // ── STEP 3A (Fundo) ──
+  document.getElementById('back3a').addEventListener('click', () => { showStep(2); setProgress(2); });
+  document.getElementById('btn3a').addEventListener('click', () => {
+    state.estagio_fundo = document.getElementById('estagio-fundo').value;
+    state.tamanho_cheque = document.getElementById('tamanho-cheque').value.trim();
+    submitForm({ ...state });
+  });
+
+  // ── STEP 3B (Startup) ──
+  document.getElementById('back3b').addEventListener('click', () => { showStep(2); setProgress(2); });
+  document.getElementById('btn3b').addEventListener('click', () => {
+    state.estagio_startup = document.getElementById('estagio-startup').value;
+    state.vertical = document.getElementById('vertical').value;
+    submitForm({ ...state, ja_captou: state.ja_captou ? 'sim' : 'nao' });
+  });
+
+  // ── STEP 3C (Outro) ──
+  document.getElementById('back3c').addEventListener('click', () => { showStep(2); setProgress(2); });
+  document.getElementById('btn3c').addEventListener('click', () => { submitForm({ ...state }); });
+</script>
+
+</body>
+</html>
