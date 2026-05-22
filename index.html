@@ -1690,6 +1690,8 @@ function setLang(lang) {
         sec.style.display = '';
         sec.classList.add('visible');
       }
+      var cta = document.querySelector('a[href="/acesso"]');
+      if (cta) cta.closest('div').style.display = 'none';
     }
   })();
 </script>
